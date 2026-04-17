@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-on-background: #1a1c1e;
@@ -88,6 +89,16 @@
 
   .hero-mask {
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+  }
+
+  .diagonal-split {
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+  }
+
+  @media (max-width: 768px) {
+    .diagonal-split {
+      clip-path: none;
+    }
   }
 }
 
