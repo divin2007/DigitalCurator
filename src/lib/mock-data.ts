@@ -13,6 +13,10 @@ export const properties: Property[] = [
     baths: 5.5,
     area: "850 sqm",
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuDgEf8FYc-JtRPthjt9JubutE_yuOoNMK1U-rfDzukAX6mxvX1BVLMaa1wxwMkEFo5Vwsad_CQ8WYi6wXY2kbkhzNcIFrYSeen0bI6vQBZ-DoEvcEYihNhzZoMeV6X4Wxw0dSBCZ7ffb44-GvvBbZuBVAN1_pR2YwnNANrf36PRs28KOHgjuKZis2nu0koh9sDe1sEDgxiFXxUWpOLutTaN4XnCsrKUbGvyuvyEOdXjSkaUjKEuFPL25TJP_9btNPp5fbuqqUi5WF0",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDgEf8FYc-JtRPthjt9JubutE_yuOoNMK1U-rfDzukAX6mxvX1BVLMaa1wxwMkEFo5Vwsad_CQ8WYi6wXY2kbkhzNcIFrYSeen0bI6vQBZ-DoEvcEYihNhzZoMeV6X4Wxw0dSBCZ7ffb44-GvvBbZuBVAN1_pR2YwnNANrf36PRs28KOHgjuKZis2nu0koh9sDe1sEDgxiFXxUWpOLutTaN4XnCsrKUbGvyuvyEOdXjSkaUjKEuFPL25TJP_9btNPp5fbuqqUi5WF0",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAzN6MXwO2k_ZcL8LfpUIK6uQSTDfNhEKlTg2JpYIYAZeOIWCQygnUtc3-AP8GeYJD47k7VlP0lBDx85SN-fR_-KcR-6NsHAuHpMx7_KefIyjf8UivDQym8UupVca25dxtjD_umwHP2dKAZzBQ-oD_0frmTla8K72CYoc7nh2WO1b4zgDhm4R2YV3jsEvg089T8jYPVfF-v_1IoAwu8W9xgvJCu4p8QrDDrc4vBceIDbVv9E5Rg6kfVt8o07F5dTTVflT_R-gnmlVo"
+    ],
     features: ["Infinity Pool", "Private Cinema", "Wine Cellar", "City View"],
     status: "active",
   },
@@ -26,6 +30,9 @@ export const properties: Property[] = [
     offer: "buy",
     area: "2.5 Hectares",
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuA6vXFpye6QsnkR2eA-n7qcUQ2xIZEja7eH3pQYSPVcbDEkG_BpwHQthAjvo4ekKfP-sWp9jRN83sXDKA2cW19EacDK-Fp-CrnENU8jfr5GGSmcktuwjeBDjjibbeI5G4_Hanq0favs3ttybu2jgZk21r-BU_DNIP7E11IBkB_KYBpn9DoeWRRETCG1wfj_ySnkIqsDpkY7xwcUt0DbHY55Y9E05S0c4OhFP5Zh1IreENO7zMgsDKBBh5s-c-gsqTh5dctBE6gSY04",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuA6vXFpye6QsnR2eA-n7qcUQ2xIZEja7eH3pQYSPVcbDEkG_BpwHQthAjvo4ekKfP-sWp9jRN83sXDKA2cW19EacDK-Fp-CrnENU8jfr5GGSmcktuwjeBDjjibbeI5G4_Hanq0favs3ttybu2jgZk21r-BU_DNIP7E11IBkB_KYBpn9DoeWRRETCG1wfj_ySnkIqsDpkY7xwcUt0DbHY55Y9E05S0c4OhFP5Zh1IreENO7zMgsDKBBh5s-c-gsqTh5dctBE6gSY04"
+    ],
     features: ["Panoramic View", "Development Ready", "Secure Title"],
     status: "active",
   },
@@ -40,7 +47,10 @@ export const properties: Property[] = [
     beds: 4,
     baths: 4,
     area: "450 sqm",
-    imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCFJLwyhhnp-ej_o8EfOyvhIUqlkSbtmPuAfMFjNTqZzx_4tutaiCAqv88bdlL6p3d8nc8iZsnLIWxK2NkY4g4fp2ayfZ5PM467GkiLpswpFDAoP5TX5PrtaHUG3L_E4aZrYg8hxaD6SzVV2J6Bw8VM2UzHbUFYRGtkMV2cdjGj7N6TyDAqkb8ccebpNNHKZKN1nl0q2MoQNNmj8gdnUx-2Uvqr70Ii64YUUT_R2gES8VldgRE4D2HyAlHFTFluQIM6PwpuRvXZLKs",
+    imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCFJLwyhhnp-ej_o8EfOyvhIUqlkSbtmPuAfMFjNTqZzx_4tutaiCAqv88bdlL6p3d8nc8iZsnLIWxK2NkY4g4fp2ayfZ5PM467GkiLpswpFDAoP5TX5PrtaHUG3L_E4aZrYg8hxaD6SzVV2J6Bw8VM2UzHbUFYRGtkMV2cdjGj7N6TyDAqv88bdlL6p3d8nc8iZsnLIWxK2NkY4g4fp2ayfZ5PM467GkiLpswpFDAoP5TX5PrtaHUG3L_E4aZrYg8hxaD6SzVV2J6Bw8VM2UzHbUFYRGtkMV2cdjGj7N6TyDAqkb8ccebpNNHKZKN1nl0q2MoQNNmj8gdnUx-2Uvqr70Ii64YUUT_R2gES8VldgRE4D2HyAlHFTFluQIM6PwpuRvXZLKs",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCFJLwyhhnp-ej_o8EfOyvhIUqlkSbtmPuAfMFjNTqZzx_4tutaiCAqv88bdlL6p3d8nc8iZsnLIWxK2NkY4g4fp2ayfZ5PM467GkiLpswpFDAoP5TX5PrtaHUG3L_E4aZrYg8hxaD6SzVV2J6Bw8VM2UzHbUFYRGtkMV2cdjGj7N6TyDAqkb8ccebpNNHKZKN1nl0q2MoQNNmj8gdnUx-2Uvqr70Ii64YUUT_R2gES8VldgRE4D2HyAlHFTFluQIM6PwpuRvXZLKs"
+    ],
     features: ["Infinity Pool", "Gated Community", "Tropical Garden"],
     status: "active",
   },
@@ -56,6 +66,10 @@ export const properties: Property[] = [
     baths: 4,
     area: "420 sqm",
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuB8xWUDEHZiDW7d23GieVNdyrYU0XPioOJ80z6KMVCDtuWFB2ygJxGeQ7tOlIY24TYDGld81GrxxdmSjIvPmDoM_G4R1k09rwrAPBLL7WQje812-Rwd8cN3rqVGrTVehsF1NjsynJoJq-bjymePC88Z9nDE9ApSSjRIBrioOSqBja3_TOrkXuoGbeaixLBSfm4pU9M2rnR7sA8Tkk_GT6vAfQhXRmfEIRutIftFd2bd-q61c85lAJfqsDnXClfQgjkxO9VBENfWquc",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuB8xWUDEHZiDW7d23GieVNdyrYU0XPioOJ80z6KMVCDtuWFB2ygJxGeQ7tOlIY24TYDGld81GrxxdmSjIvPmDoM_G4R1k09rwrAPBLL7WQje812-Rwd8cN3rqVGrTVehsF1NjsynJoJq-bjymePC88Z9nDE9ApSSjRIBrioOSqBja3_TOrkXuoGbeaixLBSfm4pU9M2rnR7sA8Tkk_GT6vAfQhXRmfEIRutIftFd2bd-q61c85lAJfqsDnXClfQgjkxO9VBENfWquc",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBazJI622wRiagsGt7w3oUBGO54vXJs2hicyBOrZtCjL9YbsagKm7SWwZpx9CDcLV10Vpz1pI1r4eRb2JX9fbosk9jGacWEMielPtRtz9SiwdTmqyThnYHlUne01sH-7sVbWXSVUtyv0pDFUp6kBAxmBMxmNFgEtpl_oFAzhj1C2oa5JcbwE_YrrY2jDYTGURg5PYjYZ_xXtgd-XE1oYs6g8YEeBNxw6n7lIfTZzu-Xcduoo7FttHU3RwQpHBDJln8DM7ISKHL2-CQ"
+    ],
     features: ["Lakefront", "Private Spa", "Organic Architecture", "Private Dock"],
     status: "active",
   }
