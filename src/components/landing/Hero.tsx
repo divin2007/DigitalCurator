@@ -1,13 +1,16 @@
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 export default function Hero() {
   return (
     <section className="relative min-h-[921px] flex items-center px-8 md:px-24 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img
-          className="w-full h-full object-cover brightness-[0.85]"
+        <Image
+          className="object-cover brightness-[0.85]"
           alt="Modern ultra-luxury Kigali villa"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKnbeWIoemqKa6QsohdrqmNnGpunAsTBAE6AHfIzBf8HAGAgL8ShxI8pyRzeAqV7N91Zb5bVEtvqKnfiTxlUHi-rkBKAQwMUh4hr5p1e81BwMvdAPfiNuIE3OxPUJ_go-c237xkrgbz2Fblg5vI7j08Ud4Qj_5Oeutlyqcu_APhttX2xcM1rd2YO2fWThAdMv_Suvh-bzLOyNodYbdvUdaumpJds-SV3mqZH9xCWdU6fI8Wflu0kEidwd3VMPAWGkBg_uq_PLKBSs"
+          fill
+          priority
         />
       </div>
       <div className="relative z-10 max-w-4xl space-y-8">

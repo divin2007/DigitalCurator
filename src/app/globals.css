@@ -55,9 +55,9 @@
   --radius-xl: 0.5rem;
   --radius-full: 0.75rem;
 
-  --font-headline: "Noto Serif", serif;
-  --font-body: "Manrope", sans-serif;
-  --font-label: "Manrope", sans-serif;
+  --font-headline: var(--font-noto-serif);
+  --font-body: var(--font-manrope);
+  --font-label: var(--font-manrope);
 }
 
 @layer base {

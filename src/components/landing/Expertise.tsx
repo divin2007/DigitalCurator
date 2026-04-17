@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 export default function Expertise() {
   return (
@@ -18,11 +19,12 @@ export default function Expertise() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-24 lg:gap-x-12">
         {/* Buying & Advisory */}
         <section className="lg:col-span-7 space-y-8">
-          <div className="aspect-[16/9] overflow-hidden rounded-sm bg-surface-container-high">
-            <img
+          <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-surface-container-high">
+            <Image
               alt="Modern Rwandan Villa"
-              className="w-full h-full object-cover"
+              className="object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhSNhm8LvOV1IgA707p7xNYa9XLss5awhcC17rDwrYvbfbJ3BaNDU5HDGMUWnlqjuey3Ma5Wd-jHSibQXw44eYwIf5zNhL1hwAOiSJenxzsSGFzsap4ShozpPaRKjtThh0DJiHR1Fz_Z78KBRnX9bSKakX_pYI2AlDmxAFWOV_xhmg48Nqxl_EgPCTkXe_XNsf-kZ1LzImbZCkjBbwLRk7HNMW8xQBNXvlRNAzCpaGnTDKbQTEx8temQ7eoenx5roWHx9JKq5F0FY"
+              fill
             />
           </div>
           <div className="max-w-2xl">
@@ -76,11 +78,12 @@ export default function Expertise() {
               </div>
             </div>
           </div>
-          <div className="order-1 lg:order-2 aspect-square lg:aspect-[4/5] overflow-hidden rounded-sm">
-            <img
+          <div className="order-1 lg:order-2 relative aspect-square lg:aspect-[4/5] overflow-hidden rounded-sm">
+            <Image
               alt="Rwandan Landscape"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkruTBASG997lnk6BxhhSLT-DkcgbbDg9brA8myzama-1Cj7UihAO7BXD8yj19aReeLPuopqSuZevb3vseKzh2HlhRSocu3soYF53eKehd1E7FLOSvoTvUoyUlo-NO8kPoJi9P8pkWMIk4aZTFj_pb8scKKobjrOx1llW5NSym7e-r8B7PxwwOCySh-75sHNcBehPlh0UlPmFND_hb19Qz7HNSuaUihYOT6NBErXjlPtqOrMBb4DM0l2et9bvBxoyf5gKV03iuPa0"
+              fill
             />
           </div>
         </section>

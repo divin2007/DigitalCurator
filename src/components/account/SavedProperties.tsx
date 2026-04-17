@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SavedProperties() {
   return (
@@ -11,8 +12,13 @@ export default function SavedProperties() {
         {/* Property Card 1 */}
         <Link href="/properties/obsidian-heights-villa" className="bg-surface-container-lowest editorial-shadow transition-all group cursor-pointer hover:scale-[1.02] active:scale-100">
           <div className="relative aspect-[4/5] overflow-hidden">
-            <img alt="Kigali Luxury Villa" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzN6MXwO2k_ZcL8LfpUIK6uQSTDfNhEKlTg2JpYIYAZeOIWCQygnUtc3-AP8GeYJD47k7VlP0lBDx85SN-fR_-KcR-6NsHAuHpMx7_KefIyjf8UivDQym8UupVca25dxtjD_umwHP2dKAZzBQ-oD_0frmTla8K72CYoc7nh2WO1b4zgDhm4R2YV3jsEvg089T8jYPVfF-v_1IoAwu8W9xgvJCu4p8QrDDrc4vBceIDbVv9E5Rg6kfVt8o07F5dTTVflT_R-gnmlVo" />
-            <span className="absolute top-4 right-4 rounded-full px-4 py-1.5 bg-primary-fixed text-on-primary-fixed-variant text-[0.6875rem] font-bold tracking-widest uppercase">
+            <Image
+              alt="Kigali Luxury Villa"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzN6MXwO2k_ZcL8LfpUIK6uQSTDfNhEKlTg2JpYIYAZeOIWCQygnUtc3-AP8GeYJD47k7VlP0lBDx85SN-fR_-KcR-6NsHAuHpMx7_KefIyjf8UivDQym8UupVca25dxtjD_umwHP2dKAZzBQ-oD_0frmTla8K72CYoc7nh2WO1b4zgDhm4R2YV3jsEvg089T8jYPVfF-v_1IoAwu8W9xgvJCu4p8QrDDrc4vBceIDbVv9E5Rg6kfVt8o07F5dTTVflT_R-gnmlVo"
+              fill
+            />
+            <span className="absolute top-4 right-4 z-10 rounded-full px-4 py-1.5 bg-primary-fixed text-on-primary-fixed-variant text-[0.6875rem] font-bold tracking-widest uppercase">
               $2,450,000
             </span>
           </div>
@@ -28,8 +34,13 @@ export default function SavedProperties() {
         {/* Property Card 2 */}
         <Link href="/properties/kivu-emerald-estate" className="bg-surface-container-lowest editorial-shadow transition-all group cursor-pointer hover:scale-[1.02] active:scale-100">
           <div className="relative aspect-[4/5] overflow-hidden">
-            <img alt="Lake Kivu Retreat" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBazJI622wRiagsGt7w3oUBGO54vXJs2hicyBOrZtCjL9YbsagKm7SWwZpx9CDcLV10Vpz1pI1r4eRb2JX9fbosk9jGacWEMielPtRtz9SiwdTmqyThnYHlUne01sH-7sVbWXSVUtyv0pDFUp6kBAxmBMxmNFgEtpl_oFAzhj1C2oa5JcbwE_YrrY2jDYTGURg5PYjYZ_xXtgd-XE1oYs6g8YEeBNxw6n7lIfTZzu-Xcduoo7FttHU3RwQpHBDJln8DM7ISKHL2-CQ" />
-            <span className="absolute top-4 right-4 rounded-full px-4 py-1.5 bg-primary-fixed text-on-primary-fixed-variant text-[0.6875rem] font-bold tracking-widest uppercase">
+            <Image
+              alt="Lake Kivu Retreat"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBazJI622wRiagsGt7w3oUBGO54vXJs2hicyBOrZtCjL9YbsagKm7SWwZpx9CDcLV10Vpz1pI1r4eRb2JX9fbosk9jGacWEMielPtRtz9SiwdTmqyThnYHlUne01sH-7sVbWXSVUtyv0pDFUp6kBAxmBMxmNFgEtpl_oFAzhj1C2oa5JcbwE_YrrY2jDYTGURg5PYjYZ_xXtgd-XE1oYs6g8YEeBNxw6n7lIfTZzu-Xcduoo7FttHU3RwQpHBDJln8DM7ISKHL2-CQ"
+              fill
+            />
+            <span className="absolute top-4 right-4 z-10 rounded-full px-4 py-1.5 bg-primary-fixed text-on-primary-fixed-variant text-[0.6875rem] font-bold tracking-widest uppercase">
               $1,800,000
             </span>
           </div>

@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -10,10 +11,11 @@ export default function About() {
         {/* Hero Section */}
         <section className="relative min-h-[921px] flex items-center px-8 md:px-24 overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img
+            <Image
               alt="Luxury Rwandan Estate"
-              className="w-full h-full object-cover opacity-90"
+              className="object-cover opacity-90"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAggW5HpQpgu3OzOKzTSio01-oAS0wsz-gIm9YCBZvb7gQOepE_kiXm66scfcMbVvhTq-X4Ax_bL7jVtIp1lfXy1czy9Rpzpf7Kc2nDTJEMDFz1AXUdXo0vcPevYeO3jDY7F7pq62WiPRIZEIYoZmRE9vMHTNF18iYT2TEPW6GFRJgofNCCPNo_r-nLFRpUvvWRMsdZgclr8eO94L7JPidK9za5pd949XsME2Zmo1_OsON-sn0xSTPdfpEs74tpXeBmFNReOhqy2xc"
+              fill
             />
             <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/40 to-transparent"></div>
           </div>
@@ -43,18 +45,20 @@ export default function About() {
               </div>
             </div>
             <div className="md:col-span-7 grid grid-cols-2 gap-4 h-[600px]">
-              <div className="h-full pt-12">
-                <img
-                  className="w-full h-full object-cover rounded-sm shadow-2xl"
+              <div className="relative h-full pt-12">
+                <Image
+                  className="object-cover rounded-sm shadow-2xl"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhdcUsqkME1XJFu7sJYEwZm_MmKD6_Z9Mf8ysjKyEmV42mjZBmNyEO4sZE6GKzcHjJP-WfqiYeKrWnVa4hClC-PnEQMaQYMilY98nznh1lkOLOVlVXDDteLtSxj9lhln3mhJkkjmZ3ezPlneoP_3Y4YsXovDoBGiGqeiEArZX-YFHrHqmeGYcJFUaQp813UZsqy-thC7B6dcZ8X6lStiVfwOCTMpR_dfi05YmyaFG3OevJj7t-pPECGhliHbp0knoKatluS7JC_W0"
                   alt="Architecture detail"
+                  fill
                 />
               </div>
-              <div className="h-full pb-12">
-                <img
-                  className="w-full h-full object-cover rounded-sm shadow-xl"
+              <div className="relative h-full pb-12">
+                <Image
+                  className="object-cover rounded-sm shadow-xl"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg3XgMeoE4UhHPZv2DeJtMxVuiwYEC-ww0WjmJcALpBht95qIFTfMsRmeQWyUmIObbHlPGZWXr6KAuUf7irXqosxg5GBdGgfiZyFqve9uA95Y5cmL6PRnpz4SmYA7YZwF1vMXyRP88iqaWql3-VzvGzO-vOhOhF_UnM2EYQFXdYROW4OBLSwJC_O0ExRuEoaQuGFliMgBWmuOTBetwozjXvTxr6Go11G4fe0pj2kacievlV2bWxC5QnGhIdDRu5GElF43brjK_K-M"
                   alt="Kigali landscape"
+                  fill
                 />
               </div>
             </div>
@@ -66,11 +70,12 @@ export default function About() {
           <div className="max-w-screen-2xl mx-auto px-8 md:px-24">
             <div className="flex flex-col md:flex-row items-center gap-16 md:gap-32">
               <div className="w-full md:w-1/2 relative">
-                <div className="aspect-[4/5] overflow-hidden">
-                  <img
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Image
                     alt="Mahoro Tuyishime Divin"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbi_d8hT-IpSleSyHKO83dKyDGA_Q3VlC2wFfiUYSFouO6RW0Ti3_bu1KmvZAW_AK01g9eyz0V3wLLcz0zoYSFSECIsFQiM4ozya9bPLS6hOHPCO7bHJoLDaLRhYy0v-Z8Wv7sM1UZVOyjBPC0kaqUCh2xTYeMhfDYWH7FdHTSQOFyBt5C1TcOTBKPj_NHvZtGPozz4y3mXGQzKpDTIBWXaGaHCEHPpLHnBmmDFytZpN9EU9ljU0bSq9NZiM2vpRVv3c13ce-CCsI"
+                    fill
                   />
                 </div>
                 <div className="absolute -bottom-6 -right-6 bg-primary p-8 hidden md:block">

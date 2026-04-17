@@ -1,5 +1,19 @@
 import type { Metadata } from "next";
+import { Noto_Serif, Manrope } from "next/font/google";
 import "./globals.css";
+
+const notoSerif = Noto_Serif({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-noto-serif",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-manrope",
+});
 
 export const metadata: Metadata = {
   title: "The Digital Curator | Rwandan Luxury Real Estate",
@@ -12,18 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className={`light ${notoSerif.variable} ${manrope.variable}`}>
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className="antialiased">
         {children}
       </body>
     </html>
