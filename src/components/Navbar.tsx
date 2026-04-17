@@ -81,7 +81,8 @@ export default function Navbar() {
           <Link
             key={link.name}
             href={link.href}
-            className={`font-headline text-4xl tracking-tight text-zinc-900 dark:text-zinc-100 hover:text-primary transition-all duration-300 delay-[${i * 100}ms]`}
+            style={{ transitionDelay: `${i * 100}ms` }}
+            className={`font-headline text-4xl tracking-tight text-zinc-900 dark:text-zinc-100 hover:text-primary transition-all duration-300 ${isOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
             onClick={() => setIsOpen(false)}
           >
             {link.name}

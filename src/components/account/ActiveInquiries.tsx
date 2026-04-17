@@ -1,3 +1,5 @@
+import Button from "@/components/ui/Button";
+
 export default function ActiveInquiries() {
   return (
     <section className="space-y-8">
@@ -9,7 +11,7 @@ export default function ActiveInquiries() {
         {/* Requested Property List Item */}
         <div className="flex items-center justify-between p-6 bg-surface-container-lowest border border-outline-variant/20 hover:border-primary/40 transition-colors group">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
+            <div className="w-20 h-20 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 bg-zinc-200">
               <img
                 alt="Emerald Ridge Residence"
                 className="w-full h-full object-cover"
@@ -41,9 +43,9 @@ export default function ActiveInquiries() {
             </div>
           </div>
           <div className="text-right">
-            <button className="text-[0.6875rem] font-bold border border-white/20 px-4 py-2 uppercase tracking-widest hover:bg-white hover:text-black transition-colors font-label cursor-pointer">
+            <Button variant="outline" className="!border-white/20 hover:!bg-white hover:!text-black !text-[0.6875rem]">
               Action Required
-            </button>
+            </Button>
           </div>
         </div>
       </div>

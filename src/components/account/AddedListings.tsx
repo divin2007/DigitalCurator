@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 export default function AddedListings() {
   const [showForm, setShowForm] = useState(false);
@@ -98,8 +99,8 @@ export default function AddedListings() {
         </div>
       ) : (
         <div className="bg-surface-container-lowest border border-dashed border-outline-variant p-12 text-center">
-          <p className="text-on-secondary-container font-serif italic mb-4 font-body">You haven't listed any properties for sale or lease yet.</p>
-          <a href="/services" className="text-sm font-bold text-primary underline font-body cursor-pointer">Learn about listing with the Curator</a>
+          <p className="text-on-secondary-container font-headline italic mb-4">You haven&apos;t listed any properties for sale or lease yet.</p>
+          <Link href="/services#listing" className="text-sm font-bold text-primary underline font-body">Learn about listing with the Curator</Link>
         </div>
       )}
     </section>

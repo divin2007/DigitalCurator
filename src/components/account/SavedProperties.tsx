@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function SavedProperties() {
   const savedProperties = [
     {
@@ -22,7 +24,7 @@ export default function SavedProperties() {
     <section className="space-y-8">
       <div className="flex justify-between items-baseline border-b border-outline-variant/30 pb-4">
         <h2 className="font-headline text-3xl">Saved Properties</h2>
-        <a href="/properties" className="text-primary text-sm font-medium hover:text-primary-container transition-all font-body">View All (12)</a>
+        <Link href="/account/saved" className="text-primary text-sm font-medium hover:text-primary-container transition-all font-body">View All (12)</Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {savedProperties.map((property, index) => (

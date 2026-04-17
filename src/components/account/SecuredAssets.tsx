@@ -1,3 +1,5 @@
+import Button from "@/components/ui/Button";
+
 export default function SecuredAssets() {
   return (
     <section className="space-y-8">
@@ -24,10 +26,10 @@ export default function SecuredAssets() {
             </div>
             <p className="text-zinc-400 text-sm mb-8 leading-relaxed font-body">Closed: Sept 2024. Property management portal is active for maintenance, digital deeds, and secure documentation.</p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-white text-black px-6 py-3 text-[0.6875rem] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-colors flex items-center gap-2 font-label cursor-pointer">
+              <Button href="/account/management" className="!bg-white !text-black hover:!bg-primary hover:!text-white flex items-center gap-2">
                 <span className="material-symbols-outlined text-base">dashboard_customize</span> Management Console
-              </button>
-              <button className="border border-white/20 px-6 py-3 text-[0.6875rem] font-bold uppercase tracking-widest hover:bg-white/10 transition-colors font-label cursor-pointer">Digital Deed</button>
+              </Button>
+              <Button href="/account/vault" variant="outline" className="!border-white/20 !text-[0.6875rem]">Digital Deed</Button>
             </div>
           </div>
         </div>
