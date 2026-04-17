@@ -8,7 +8,7 @@ export default function About() {
       <Navbar />
       <main className="pt-24">
         {/* Hero Section */}
-        <section className="relative h-[921px] flex items-center px-8 md:px-24 overflow-hidden">
+        <section className="relative min-h-[921px] flex items-center px-8 md:px-24 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
               alt="Luxury Rwandan Estate"
@@ -81,12 +81,12 @@ export default function About() {
                 <span className="label-sm uppercase tracking-[0.2em] text-primary-fixed-dim font-semibold">The Visionary</span>
                 <h2 className="font-headline text-4xl md:text-6xl">Mahoro Tuyishime Divin</h2>
                 <p className="text-surface-container-highest text-xl italic font-headline leading-relaxed">
-                  "Luxury is not an accumulation of things; it is the elimination of the unnecessary until only the essential beauty remains. We are not building houses; we are curating the backdrop for your life’s most significant moments."
+                  &quot;Luxury is not an accumulation of things; it is the elimination of the unnecessary until only the essential beauty remains. We are not building houses; we are curating the backdrop for your life&apos;s most significant moments.&quot;
                 </p>
                 <div className="space-y-4">
                   <h4 className="font-bold tracking-widest text-primary-fixed uppercase font-label">Founder & Chief Curator</h4>
                   <p className="text-secondary-fixed-dim leading-loose font-body">
-                    With a background in architectural strategy and a deep-rooted passion for Rwanda's cultural heritage, Mahoro founded The Digital Curator to redefine how luxury is perceived and transacted in the African Great Lakes region.
+                    With a background in architectural strategy and a deep-rooted passion for Rwanda&apos;s cultural heritage, Mahoro founded The Digital Curator to redefine how luxury is perceived and transacted in the African Great Lakes region.
                   </p>
                 </div>
               </div>

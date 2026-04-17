@@ -2,7 +2,7 @@ import { Property } from "./types";
 
 export const properties: Property[] = [
   {
-    id: "1",
+    id: "obsidian-heights-villa",
     title: "The Obsidian Heights Villa",
     location: "Nyarutarama, Kigali",
     price: "$2,450,000",
@@ -17,7 +17,7 @@ export const properties: Property[] = [
     status: "active",
   },
   {
-    id: "2",
+    id: "skyline-plateau",
     title: "The Skyline Plateau",
     location: "Rebero Hill",
     price: "$680,000",
@@ -30,7 +30,7 @@ export const properties: Property[] = [
     status: "active",
   },
   {
-    id: "3",
+    id: "zen-garden-estate",
     title: "The Zen Garden Estate",
     location: "Kibagabaga, Kigali",
     price: "$12,000/mo",
@@ -45,7 +45,7 @@ export const properties: Property[] = [
     status: "active",
   },
   {
-    id: "4",
+    id: "kivu-emerald-estate",
     title: "The Kivu Emerald Estate",
     location: "Gisenyi, Lake Kivu",
     price: "$1,890,000",

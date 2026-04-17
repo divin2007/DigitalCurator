@@ -104,7 +104,7 @@ export default function Properties() {
         {/* Specialized Search CTA */}
         <section className="mt-32 p-16 bg-inverse-surface text-on-tertiary flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="max-w-xl">
-            <h2 className="text-4xl font-bold mb-6 font-headline text-white">Can't find your legacy?</h2>
+            <h2 className="text-4xl font-bold mb-6 font-headline text-white">Can&apos;t find your legacy?</h2>
             <p className="text-zinc-400 font-light leading-relaxed font-body">Our curators specialize in identifying off-market opportunities that never reach the public eye. Tell us your vision, and we will find the coordinates.</p>
           </div>
           <Button href="/contact">

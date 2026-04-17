@@ -13,7 +13,7 @@ export default function GuidePage() {
           </p>
           <h2 className="font-headline text-3xl text-on-background mt-12">Market Overview</h2>
           <p>
-            Kigali's luxury sector has shown consistent growth, driven by infrastructure development and a stable economic environment.
+            Kigali&apos;s luxury sector has shown consistent growth, driven by infrastructure development and a stable economic environment.
           </p>
           <h2 className="font-headline text-3xl text-on-background mt-12">Step-by-Step Acquisition</h2>
           <p>

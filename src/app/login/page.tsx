@@ -28,8 +28,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-[#cbd5e1] font-body text-on-background overflow-hidden h-screen flex items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-6xl aspect-[16/10] bg-white rounded-lg shadow-2xl overflow-hidden flex relative">
+    <div className="bg-[#cbd5e1] font-body text-on-background md:overflow-hidden h-screen flex items-center justify-center p-4 md:p-8">
+      <div className="w-full max-w-6xl md:aspect-[16/10] bg-white rounded-lg shadow-2xl overflow-hidden flex relative min-h-[500px]">
         {/* Left Side: Login Form */}
         <div className="w-full md:w-[55%] h-full bg-white relative z-10 diagonal-split flex flex-col items-center justify-center px-12 lg:px-24">
           <div className="w-full max-w-sm">
