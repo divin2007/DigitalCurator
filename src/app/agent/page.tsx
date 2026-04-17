@@ -1,19 +1,36 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function AgentDashboard() {
+  const [showAddForm, setShowAddForm] = useState(false);
+
+  const listings = [
+    { id: "DC-8802", title: "The Obsidian Pavilion", location: "Kigali, Rebero District", status: "Active", views: "4.8k", leads: "12", value: "$2.4M", imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-ChgPjdeXg_Hhxb7UZI7XQkf9FD-g-FdaLw-UHRccsLcE7FVCtdcDnc1Rkp3uMNGTiCNH1QFcLrd7SI8BF7uO5xhs9TrOAk-OB4JxcD3VGXsxnnXvJ-VgCnom3B5JbQQyD9eqdQbo7CrILvMN9I2OhBKvcVYWjuN-kZag2GkRfl9Me6dsjI1irFjejGCH1BSrdK20PBoU76KXhifJictHheWpaSCAxTziRH1UOpu8vEZl3VEzDKWSaKgJ6vs1QIltrVkoIm28xIk" },
+    { id: "DC-4419", title: "Lake Kivu Serenity Suite", location: "Gisenyi Waterfront", status: "Pending", views: "12.2k", leads: "84", value: "$1.8M", imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBLOnaxejwFxkjpPBzk2Eof6bHbiLzxP6j_WL0qNq9B2Iq7PZE1WX4EaZK4blSmeM-dh0LG55e3M3oSjpTCg4NO7AivV74jKUd6lfF0WE4lNi_AYF-d--1um4F12FbrWvQyFY17uz_k4MmZJHswko9fVFZr5h3XWpGHQiINdMMPgrGhXq5PGOguR5zUrMwECBa-8pT8aK4MOdQzz98ip79RTbkKuJ6dz-TcVWPLcvKqoKzKpdZKmuZTCXBV4y3RB6n0x8rnh1ztfl8" },
+    { id: "DC-1002", title: "The Canopy Retreat", location: "Nyarutarama District", status: "Sold", views: "25k", leads: "156", value: "$3.1M", imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCbucCSo5-cEaC9GFsIdUHghaQdc3fxpBnFrvVZpde0PfJgsQmVLZy0MdJ6DV_7Kji7_67ouGy-ydYUs3zXLE6VDxFXDKcZABpmzqAhetSGT1gLSaAVjeqm1zIa-VkF06Cc2RsGhdHqTZ74KlZxeOMTdI9AS0VxquQHSZ8rPfufClGZtTFk7FqZPO5brxOZSH1QPrh2-7IVpHFlqDm3OPQ-chbf8NgNLgfMzVYH1ybZg_vW4vb-Scbbvgvh1Cet1w6fF0BJdoy5aH8" },
+  ];
+
+  const inquiries = [
+    { name: "Jean-Paul Karekezi", property: "The Obsidian Pavilion", action: "Inquired" },
+    { name: "Elena Rossi", property: "Lake Kivu Suite", action: "Requested viewing" },
+  ];
+
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-16 px-8 max-w-7xl mx-auto">
+      <main className="pt-32 pb-24 px-8 max-w-7xl mx-auto">
         <header className="mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
           <div className="space-y-2">
             <span className="label-sm text-[0.6875rem] uppercase tracking-[0.1em] text-primary font-bold font-label">Agent Dashboard</span>
             <h1 className="text-5xl font-headline font-bold tracking-tight text-on-surface">Curated Portfolios</h1>
             <p className="text-on-surface-variant max-w-md font-body">Oversee your collection of ultra-luxury estates and monitor engagement metrics in real-time.</p>
           </div>
-          <Button>
+          <Button onClick={() => setShowAddForm(true)}>
             <span className="material-symbols-outlined text-sm mr-2">add</span>
             Add New Property
           </Button>
@@ -27,13 +44,9 @@ export default function AgentDashboard() {
               <h3 className="text-3xl font-headline mt-2">124,802 <span className="text-sm font-body text-primary">+12%</span></h3>
             </div>
             <div className="flex items-end gap-1 h-12">
-              <div className="w-full bg-primary/10 h-[20%] rounded-t-sm"></div>
-              <div className="w-full bg-primary/10 h-[40%] rounded-t-sm"></div>
-              <div className="w-full bg-primary/20 h-[35%] rounded-t-sm"></div>
-              <div className="w-full bg-primary/40 h-[60%] rounded-t-sm"></div>
-              <div className="w-full bg-primary/60 h-[50%] rounded-t-sm"></div>
-              <div className="w-full bg-primary h-[90%] rounded-t-sm"></div>
-              <div className="w-full bg-primary/80 h-[70%] rounded-t-sm"></div>
+              {[20, 40, 35, 60, 50, 90, 70].map((h, i) => (
+                <div key={i} className="w-full bg-primary/20 rounded-t-sm" style={{ height: `${h}%` }}></div>
+              ))}
             </div>
           </div>
           <div className="bg-surface-container-low p-8 rounded-sm flex flex-col justify-between">
@@ -53,47 +66,139 @@ export default function AgentDashboard() {
         </section>
 
         {/* Property Management List */}
-        <section>
+        <section className="mb-20">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-headline font-semibold">Active Listings</h2>
+            <div className="flex gap-4">
+              <button className="text-sm font-medium border-b border-primary text-primary pb-1 font-label uppercase">All</button>
+              <button className="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors pb-1 font-label uppercase">Pending</button>
+              <button className="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors pb-1 font-label uppercase">Sold</button>
+            </div>
           </div>
           <div className="space-y-4">
-            <div className="group bg-surface-container-lowest overflow-hidden flex flex-col md:flex-row editorial-shadow transition-all hover:bg-surface-container-low cursor-pointer">
-              <div className="md:w-64 h-48 overflow-hidden bg-zinc-200">
-                <img
-                  alt="Luxury Villa"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-ChgPjdeXg_Hhxb7UZI7XQkf9FD-g-FdaLw-UHRccsLcE7FVCtdcDnc1Rkp3uMNGTiCNH1QFcLrd7SI8BF7uO5xhs9TrOAk-OB4JxcD3VGXsxnnXvJ-VgCnom3B5JbQQyD9eqdQbo7CrILvMN9I2OhBKvcVYWjuN-kZag2GkRfl9Me6dsjI1irFjejGCH1BSrdK20PBoU76KXhifJictHheWpaSCAxTziRH1UOpu8vEZl3VEzDKWSaKgJ6vs1QIltrVkoIm28xIk"
-                />
-              </div>
-              <div className="flex-1 p-6 flex flex-col md:flex-row justify-between md:items-center gap-6">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-3">
-                    <span className="bg-primary-fixed text-on-primary-fixed-variant px-3 py-0.5 rounded-full text-[0.6rem] font-bold tracking-widest uppercase font-label">Active</span>
-                    <span className="text-on-surface-variant text-xs font-body">ID: DC-8802</span>
-                  </div>
-                  <h4 className="text-xl font-headline font-semibold">The Obsidian Pavilion</h4>
-                  <p className="text-on-surface-variant text-sm font-light font-body">Kigali, Rebero District • 5 Bedrooms • 6,200 sqft</p>
+            {listings.map((item) => (
+              <div key={item.id} className="group bg-surface-container-lowest overflow-hidden flex flex-col md:flex-row editorial-shadow transition-all hover:bg-surface-container-low cursor-pointer">
+                <div className="md:w-64 h-48 overflow-hidden bg-zinc-200">
+                  <img alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={item.imageUrl} />
                 </div>
-                <div className="grid grid-cols-3 gap-8 text-center md:text-left">
-                  <div>
-                    <span className="block text-[0.6rem] uppercase tracking-widest text-on-surface-variant mb-1 font-label">Views</span>
-                    <span className="font-headline font-semibold">4.8k</span>
+                <div className="flex-1 p-6 flex flex-col md:flex-row justify-between md:items-center gap-6">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-3">
+                      <span className={`px-3 py-0.5 rounded-full text-[0.6rem] font-bold tracking-widest uppercase font-label ${
+                        item.status === "Active" ? "bg-primary-fixed text-on-primary-fixed-variant" :
+                        item.status === "Pending" ? "bg-secondary-container text-on-secondary-container" :
+                        "bg-inverse-surface text-white"
+                      }`}>{item.status}</span>
+                      <span className="text-on-surface-variant text-xs font-body">ID: {item.id}</span>
+                    </div>
+                    <h4 className="text-xl font-headline font-semibold">{item.title}</h4>
+                    <p className="text-on-surface-variant text-sm font-light font-body">{item.location}</p>
                   </div>
-                  <div>
-                    <span className="block text-[0.6rem] uppercase tracking-widest text-on-surface-variant mb-1 font-label">Leads</span>
-                    <span className="font-headline font-semibold">12</span>
+                  <div className="grid grid-cols-3 gap-8 text-center md:text-left">
+                    <div>
+                      <span className="block text-[0.6rem] uppercase tracking-widest text-on-surface-variant mb-1 font-label">Views</span>
+                      <span className="font-headline font-semibold">{item.views}</span>
+                    </div>
+                    <div>
+                      <span className="block text-[0.6rem] uppercase tracking-widest text-on-surface-variant mb-1 font-label">Leads</span>
+                      <span className="font-headline font-semibold">{item.leads}</span>
+                    </div>
+                    <div>
+                      <span className="block text-[0.6rem] uppercase tracking-widest text-on-surface-variant mb-1 font-label">Value</span>
+                      <span className="font-headline font-semibold">{item.value}</span>
+                    </div>
                   </div>
-                  <div>
-                    <span className="block text-[0.6rem] uppercase tracking-widest text-on-surface-variant mb-1 font-label">Value</span>
-                    <span className="font-headline font-semibold">$2.4M</span>
+                  <div className="flex gap-2">
+                    <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+                      <span className="material-symbols-outlined text-on-surface-variant">edit</span>
+                    </button>
+                    <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+                      <span className="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                    </button>
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Bottom Sections */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="space-y-6">
+            <h3 className="text-3xl font-headline italic">Recent Inquiries</h3>
+            <div className="divide-y divide-outline-variant/20">
+              {inquiries.map((inq, i) => (
+                <div key={i} className="py-4 flex justify-between items-center group cursor-pointer">
+                  <div>
+                    <p className="font-medium text-on-surface font-headline">{inq.name}</p>
+                    <p className="text-xs text-on-secondary-container font-body">{inq.action} about &quot;{inq.property}&quot;</p>
+                  </div>
+                  <span className="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </div>
+              ))}
             </div>
+          </div>
+          <div className="bg-primary/5 p-10 rounded-sm border border-primary/10">
+            <h3 className="text-3xl font-headline mb-4">Curator&apos;s Tip</h3>
+            <p className="font-light leading-relaxed text-on-surface-variant mb-6 font-body">
+              Properties with sunset-timed photography see a 40% higher engagement rate in the Kigali luxury sector. Consider updating your lead image for <span className="font-medium italic">The Obsidian Pavilion</span>.
+            </p>
+            <Link href="/guide" className="text-primary font-bold text-[0.7rem] uppercase tracking-[0.2em] flex items-center gap-2 group font-label">
+              View Optimization Guide
+              <span className="w-8 h-[1px] bg-primary group-hover:w-12 transition-all"></span>
+            </Link>
           </div>
         </section>
       </main>
+
+      {/* Add Property Modal */}
+      {showAddForm && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white max-w-2xl w-full p-12 relative editorial-shadow max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setShowAddForm(false)}
+              className="absolute top-6 right-6 text-zinc-400 hover:text-black transition-colors"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+            <h2 className="font-headline text-3xl mb-8">Add New Property</h2>
+            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setShowAddForm(false); }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Property Title</label>
+                  <input className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body" type="text" placeholder="The Marble Sanctuary" />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Location</label>
+                  <input className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body" type="text" placeholder="Nyarutarama, Kigali" />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Price (USD)</label>
+                  <input className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body" type="text" placeholder="$1,250,000" />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Type</label>
+                  <select className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body">
+                    <option>House</option>
+                    <option>Land</option>
+                    <option>Apartment</option>
+                  </select>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Description</label>
+                <textarea className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body resize-none" rows={3} placeholder="A masterwork of contemporary design..."></textarea>
+              </div>
+              <div className="pt-4">
+                <Button type="submit" className="w-full">Create Listing</Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </>
   );

@@ -1,0 +1,58 @@
+"use client";
+
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Link from "next/link";
+import { properties } from "@/lib/mock-data";
+
+export default function SavedProperties() {
+  // Mock saved properties - using all for now
+  const savedProperties = properties;
+
+  return (
+    <>
+      <Navbar />
+      <main className="pt-32 pb-24 px-8 max-w-screen-2xl mx-auto">
+        <div className="mb-12">
+          <Link href="/account" className="flex items-center gap-2 text-primary font-headline text-sm tracking-widest uppercase hover:gap-4 transition-all duration-300">
+            <span className="material-symbols-outlined text-sm">arrow_back</span>
+            Back to Dashboard
+          </Link>
+        </div>
+
+        <header className="mb-16">
+          <h1 className="font-headline text-5xl md:text-6xl text-on-background tracking-tight">Saved Collection</h1>
+          <p className="mt-6 text-lg text-on-secondary-container leading-relaxed font-body">Your curated wishlist of Rwandan gems, awaiting your next move.</p>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {savedProperties.map((property) => (
+            <div key={property.id} className="bg-surface-container-lowest editorial-shadow transition-all group cursor-pointer">
+              <Link href={`/properties/${property.id}`}>
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <img
+                    alt={property.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src={property.imageUrl}
+                  />
+                  <span className="absolute top-4 right-4 rounded-full px-4 py-1.5 bg-primary-fixed text-on-primary-fixed-variant text-[0.6875rem] font-bold tracking-widest uppercase">
+                    {property.price}
+                  </span>
+                </div>
+              </Link>
+              <div className="p-8">
+                <p className="text-[0.6875rem] uppercase tracking-widest text-on-secondary-container mb-2 font-label">{property.location}</p>
+                <h3 className="font-headline text-2xl mb-6">{property.title}</h3>
+                <div className="flex gap-6 text-sm text-on-secondary-container font-light font-body">
+                  <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">bed</span> 5 Beds</span>
+                  <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">square_foot</span> 640 m²</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+}
