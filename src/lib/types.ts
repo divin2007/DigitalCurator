@@ -4,28 +4,13 @@ export interface Property {
   location: string;
   price: string;
   description: string;
-  type: "house" | "land" | "apartment";
+  type: "house" | "land";
   offer: "buy" | "rent";
   beds?: number;
   baths?: number;
   area: string;
   imageUrl: string;
+  images: string[];
   features: string[];
-  status: "active" | "pending" | "sold";
-}
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: "client" | "agent";
-}
-
-export interface Inquiry {
-  id: string;
-  propertyId: string;
-  clientName: string;
-  clientEmail: string;
-  status: "new" | "review" | "contacted";
-  date: string;
+  status: string;
 }
