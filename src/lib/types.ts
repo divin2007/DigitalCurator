@@ -10,6 +10,7 @@ export interface Property {
   baths?: number;
   area: string;
   imageUrl: string;
+  images?: string[];
   features: string[];
   status: "active" | "pending" | "sold";
 }

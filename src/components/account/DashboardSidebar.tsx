@@ -30,9 +30,9 @@ export default function DashboardSidebar() {
             </div>
           </div>
         </div>
-        <button className="mt-12 text-primary text-sm font-bold flex items-center gap-2 group font-label uppercase tracking-widest cursor-pointer">
+        <Button href="/properties" variant="ghost" className="mt-12 !px-0 flex items-center gap-2 group cursor-pointer">
           Book a Viewing <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
-        </button>
+        </Button>
       </div>
 
       {/* Curator Support */}
@@ -52,9 +52,9 @@ export default function DashboardSidebar() {
             <a href="mailto:divine@digitalcurator.rw" className="text-xs text-primary underline font-body">Direct Message</a>
           </div>
         </div>
-        <button className="w-full text-center border border-primary/20 py-4 text-xs font-bold tracking-widest text-primary hover:bg-primary hover:text-white transition-colors uppercase font-label cursor-pointer">
+        <Button href="/contact" variant="outline" className="w-full">
           Schedule Sync
-        </button>
+        </Button>
       </div>
 
       {/* Secure Document Vault */}

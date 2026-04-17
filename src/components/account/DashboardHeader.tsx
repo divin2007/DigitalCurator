@@ -9,7 +9,7 @@ export default function DashboardHeader() {
         <p className="mt-6 text-lg text-on-secondary-container leading-relaxed font-body">Your curated collection of Rwandan legacy properties and active applications, managed with precision and security.</p>
       </div>
       <div className="flex gap-4">
-        <Button>CONTACT CURATOR</Button>
+        <Button href="/contact">CONTACT CURATOR</Button>
       </div>
     </header>
   );

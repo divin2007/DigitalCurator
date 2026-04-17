@@ -17,6 +17,8 @@ export default function PropertyDetail({ params: paramsPromise }: { params: Prom
   });
   const [submitted, setSubmitted] = useState(false);
 
+  const [activeImage, setActiveImage] = useState(property?.imageUrl || "");
+
   if (!property) {
     notFound();
   }
@@ -48,15 +50,34 @@ export default function PropertyDetail({ params: paramsPromise }: { params: Prom
 
         <section className="px-4 md:px-8 max-w-screen-2xl mx-auto">
           <div className="grid grid-cols-12 gap-8 items-start">
-            <div className="col-span-12 md:col-span-7 lg:col-span-6 overflow-hidden rounded-sm relative group aspect-[4/3] md:h-[500px]">
-              <img
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                src={property.imageUrl}
-                alt={property.title}
-              />
-              <div className="absolute top-6 right-6">
-                <span className="bg-primary-fixed text-on-primary-fixed-variant px-4 py-1 rounded-full text-[0.6875rem] font-bold tracking-[0.1em] uppercase shadow-sm">Exclusive Listing</span>
+            <div className="col-span-12 md:col-span-7 lg:col-span-6 space-y-4">
+              <div className="overflow-hidden rounded-sm relative group aspect-[4/3] md:h-[500px]">
+                <img
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                  src={activeImage || property.imageUrl}
+                  alt={property.title}
+                />
+                <div className="absolute top-6 right-6">
+                  <span className="bg-primary-fixed text-on-primary-fixed-variant px-4 py-1 rounded-full text-[0.6875rem] font-bold tracking-[0.1em] uppercase shadow-sm">Exclusive Listing</span>
+                </div>
               </div>
+
+              {/* Image Gallery Thumbnails */}
+              {property.images && property.images.length > 1 && (
+                <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                  {property.images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveImage(img)}
+                      className={`relative flex-shrink-0 w-24 h-24 overflow-hidden rounded-sm border-2 transition-all ${
+                        (activeImage || property.imageUrl) === img ? "border-primary" : "border-transparent opacity-70 hover:opacity-100"
+                      }`}
+                    >
+                      <img src={img} alt={`${property.title} view ${idx + 1}`} className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="col-span-12 md:col-span-5 lg:col-span-6 flex flex-col justify-center py-4">
