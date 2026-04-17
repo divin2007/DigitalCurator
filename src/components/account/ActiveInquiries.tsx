@@ -1,11 +1,13 @@
 import Button from "@/components/ui/Button";
 
+import Link from "next/link";
+
 export default function ActiveInquiries() {
   return (
     <section className="space-y-8">
       <div className="flex justify-between items-baseline border-b border-outline-variant/30 pb-4">
         <h2 className="font-headline text-3xl">Active Inquiries</h2>
-        <span className="text-on-secondary-container text-xs uppercase tracking-widest font-label">Portfolio Expansion</span>
+        <Link className="text-primary text-sm font-medium hover:text-primary-container transition-all" href="/account/inquiries">View All</Link>
       </div>
       <div className="space-y-4">
         <div className="flex items-center justify-between p-6 bg-surface-container-lowest border border-outline-variant/20 hover:border-primary/40 transition-colors group cursor-pointer">
