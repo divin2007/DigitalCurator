@@ -1,6 +1,7 @@
 import Button from "@/components/ui/Button";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ActiveInquiries() {
   return (
@@ -12,8 +13,8 @@ export default function ActiveInquiries() {
       <div className="space-y-4">
         <div className="flex items-center justify-between p-6 bg-surface-container-lowest border border-outline-variant/20 hover:border-primary/40 transition-colors group cursor-pointer">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 bg-zinc-200">
-              <img alt="Property" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzN6MXwO2k_ZcL8LfpUIK6uQSTDfNhEKlTg2JpYIYAZeOIWCQygnUtc3-AP8GeYJD47k7VlP0lBDx85SN-fR_-KcR-6NsHAuHpMx7_KefIyjf8UivDQym8UupVca25dxtjD_umwHP2dKAZzBQ-oD_0frmTla8K72CYoc7nh2WO1b4zgDhm4R2YV3jsEvg089T8jYPVfF-v_1IoAwu8W9xgvJCu4p8QrDDrc4vBceIDbVv9E5Rg6kfVt8o07F5dTTVflT_R-gnmlVo" />
+            <div className="w-20 h-20 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 bg-zinc-200 relative">
+              <Image alt="Property" className="object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzN6MXwO2k_ZcL8LfpUIK6uQSTDfNhEKlTg2JpYIYAZeOIWCQygnUtc3-AP8GeYJD47k7VlP0lBDx85SN-fR_-KcR-6NsHAuHpMx7_KefIyjf8UivDQym8UupVca25dxtjD_umwHP2dKAZzBQ-oD_0frmTla8K72CYoc7nh2WO1b4zgDhm4R2YV3jsEvg089T8jYPVfF-v_1IoAwu8W9xgvJCu4p8QrDDrc4vBceIDbVv9E5Rg6kfVt8o07F5dTTVflT_R-gnmlVo" fill />
             </div>
             <div>
               <span className="text-[0.6rem] uppercase tracking-widest text-primary font-bold font-label">Property Request</span>

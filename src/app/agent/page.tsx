@@ -4,21 +4,49 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function AgentDashboard() {
   const [showAddForm, setShowAddForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [filter, setFilter] = useState("All");
 
-  const listings = [
+  const [propertyList, setPropertyList] = useState([
     { id: "DC-8802", title: "The Obsidian Pavilion", location: "Kigali, Rebero District", status: "Active", views: "4.8k", leads: "12", value: "$2.4M", imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-ChgPjdeXg_Hhxb7UZI7XQkf9FD-g-FdaLw-UHRccsLcE7FVCtdcDnc1Rkp3uMNGTiCNH1QFcLrd7SI8BF7uO5xhs9TrOAk-OB4JxcD3VGXsxnnXvJ-VgCnom3B5JbQQyD9eqdQbo7CrILvMN9I2OhBKvcVYWjuN-kZag2GkRfl9Me6dsjI1irFjejGCH1BSrdK20PBoU76KXhifJictHheWpaSCAxTziRH1UOpu8vEZl3VEzDKWSaKgJ6vs1QIltrVkoIm28xIk" },
     { id: "DC-4419", title: "Lake Kivu Serenity Suite", location: "Gisenyi Waterfront", status: "Pending", views: "12.2k", leads: "84", value: "$1.8M", imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBLOnaxejwFxkjpPBzk2Eof6bHbiLzxP6j_WL0qNq9B2Iq7PZE1WX4EaZK4blSmeM-dh0LG55e3M3oSjpTCg4NO7AivV74jKUd6lfF0WE4lNi_AYF-d--1um4F12FbrWvQyFY17uz_k4MmZJHswko9fVFZr5h3XWpGHQiINdMMPgrGhXq5PGOguR5zUrMwECBa-8pT8aK4MOdQzz98ip79RTbkKuJ6dz-TcVWPLcvKqoKzKpdZKmuZTCXBV4y3RB6n0x8rnh1ztfl8" },
     { id: "DC-1002", title: "The Canopy Retreat", location: "Nyarutarama District", status: "Sold", views: "25k", leads: "156", value: "$3.1M", imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCbucCSo5-cEaC9GFsIdUHghaQdc3fxpBnFrvVZpde0PfJgsQmVLZy0MdJ6DV_7Kji7_67ouGy-ydYUs3zXLE6VDxFXDKcZABpmzqAhetSGT1gLSaAVjeqm1zIa-VkF06Cc2RsGhdHqTZ74KlZxeOMTdI9AS0VxquQHSZ8rPfufClGZtTFk7FqZPO5brxOZSH1QPrh2-7IVpHFlqDm3OPQ-chbf8NgNLgfMzVYH1ybZg_vW4vb-Scbbvgvh1Cet1w6fF0BJdoy5aH8" },
-  ];
+  ]);
+
+  const filteredListings = propertyList.filter(p => filter === "All" || p.status === filter);
+
+  const toggleStatus = (id: string) => {
+    setPropertyList(prev => prev.map(p => {
+      if (p.id === id) {
+        const nextStatus = p.status === "Active" ? "Pending" : p.status === "Pending" ? "Sold" : "Active";
+        return { ...p, status: nextStatus };
+      }
+      return p;
+    }));
+  };
 
   const inquiries = [
     { name: "Jean-Paul Karekezi", property: "The Obsidian Pavilion", action: "Inquired" },
     { name: "Elena Rossi", property: "Lake Kivu Suite", action: "Requested viewing" },
   ];
+
+  const handleAddProperty = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setShowAddForm(false);
+    }, 2000);
+  };
 
   return (
     <>
@@ -70,16 +98,22 @@ export default function AgentDashboard() {
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-headline font-semibold">Active Listings</h2>
             <div className="flex gap-4">
-              <button className="text-sm font-medium border-b border-primary text-primary pb-1 font-label uppercase">All</button>
-              <button className="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors pb-1 font-label uppercase">Pending</button>
-              <button className="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors pb-1 font-label uppercase">Sold</button>
+              {["All", "Pending", "Sold"].map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={`text-sm font-medium pb-1 font-label uppercase transition-all ${filter === f ? 'border-b-2 border-primary text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
+                >
+                  {f}
+                </button>
+              ))}
             </div>
           </div>
           <div className="space-y-4">
-            {listings.map((item) => (
+            {filteredListings.map((item) => (
               <div key={item.id} className="group bg-surface-container-lowest overflow-hidden flex flex-col md:flex-row editorial-shadow transition-all hover:bg-surface-container-low cursor-pointer">
-                <div className="md:w-64 h-48 overflow-hidden bg-zinc-200">
-                  <img alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={item.imageUrl} />
+                <div className="md:w-64 h-48 overflow-hidden bg-zinc-200 relative">
+                  <Image alt={item.title} className="object-cover group-hover:scale-105 transition-transform duration-700" src={item.imageUrl} fill />
                 </div>
                 <div className="flex-1 p-6 flex flex-col md:flex-row justify-between md:items-center gap-6">
                   <div className="space-y-1">
@@ -109,11 +143,11 @@ export default function AgentDashboard() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+                    <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors" onClick={(e) => { e.stopPropagation(); alert("Edit interface would open here.") }}>
                       <span className="material-symbols-outlined text-on-surface-variant">edit</span>
                     </button>
-                    <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors">
-                      <span className="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                    <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors" onClick={(e) => { e.stopPropagation(); toggleStatus(item.id) }}>
+                      <span className="material-symbols-outlined text-on-surface-variant">sync</span>
                     </button>
                   </div>
                 </div>
@@ -162,7 +196,14 @@ export default function AgentDashboard() {
               <span className="material-symbols-outlined">close</span>
             </button>
             <h2 className="font-headline text-3xl mb-8">Add New Property</h2>
-            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setShowAddForm(false); }}>
+            {isSubmitted ? (
+              <div className="py-20 text-center space-y-4">
+                <span className="material-symbols-outlined text-6xl text-primary">verified</span>
+                <h3 className="text-2xl font-headline">Listing Created</h3>
+                <p className="text-on-secondary-container font-body">The property has been added to the curated collection.</p>
+              </div>
+            ) : (
+            <form className="space-y-6" onSubmit={handleAddProperty}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-1">
                   <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Property Title</label>
@@ -192,9 +233,12 @@ export default function AgentDashboard() {
                 <textarea className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body resize-none" rows={3} placeholder="A masterwork of contemporary design..."></textarea>
               </div>
               <div className="pt-4">
-                <Button type="submit" className="w-full">Create Listing</Button>
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "CREATING..." : "Create Listing"}
+                </Button>
               </div>
             </form>
+            )}
           </div>
         </div>
       )}

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,16 +14,23 @@ export default function ContactPage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+
+    // Simulate delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
     console.log("Contact Inquiry:", formData);
+    setIsLoading(false);
     setSubmitted(true);
-    // Reset form after 3 seconds
+    // Reset form after 5 seconds
     setTimeout(() => {
       setSubmitted(false);
       setFormData({ name: "", email: "", interest: "", message: "" });
-    }, 3000);
+    }, 5000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -48,11 +56,12 @@ export default function ContactPage() {
             </p>
           </div>
           <div className="lg:col-span-5 hidden lg:block">
-            <div className="aspect-[4/5] bg-surface-container-low overflow-hidden">
-              <img
-                className="w-full h-full object-cover"
+            <div className="aspect-[4/5] bg-surface-container-low overflow-hidden relative">
+              <Image
+                className="object-cover"
                 alt="Luxury Office"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPorpByTLl79Keywt1m9QR-GzXhGzEKihW9ksnAXq7h45jWY45xZogt3Ond9G9wklHj5vh2QQOHA0ZzS5bKVvnUKZNk92def2vFMBVPWNwqUVkwgEcF6yRfarkaf5sotVqSkqdkkeszChUB6j4VmltSqALFYx7pvBKSkVU2t9gqdW3kg9l_mA2tQuptV3VQ8wA8eu_DNZE5jjjPmJRYLAxhRmKDX8J_wLN7J0zslAMrBDB-0Hli-Zea6N4rZGFV8pxY7KWNBS98cs"
+                fill
               />
             </div>
           </div>
@@ -124,9 +133,9 @@ export default function ContactPage() {
                   ></textarea>
                   <label className="absolute text-sm text-on-surface-variant duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-primary font-label" htmlFor="message">MESSAGE</label>
                 </div>
-                <Button type="submit" className="inline-flex items-center group">
-                  Initiate Connection
-                  <span className="material-symbols-outlined ml-3 text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <Button type="submit" className="inline-flex items-center group" disabled={isLoading}>
+                  {isLoading ? "INITIATING..." : "Initiate Connection"}
+                  {!isLoading && <span className="material-symbols-outlined ml-3 text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>}
                 </Button>
               </form>
             )}
@@ -148,11 +157,12 @@ export default function ContactPage() {
                   </p>
                 </div>
               </div>
-              <div className="bg-surface-container-low aspect-video w-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
-                <img
-                  className="w-full h-full object-cover"
+              <div className="bg-surface-container-low aspect-video w-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 relative">
+                <Image
+                  className="object-cover"
                   alt="Kigali Map"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7ZPnGCXImUrYJ6rFayWL5GKQsLuAEAwGI4qYfje-tjWLqPXBZ6dVCTyYUgcOddA9g1cESUhfku8wJQVW7pbSrQDc0lLZXBaLj3P2OGgcRGkBFgSTP6I7Du2cS4TqlzwkJvDNXbwD3CuvHTh6oWOcCzQ3AYkFQAfDECwUnZ7QaR64ibsDTORT1qSQ2ATIsK3jOl1t4nalLI3CoTLRAr-SGhH6N1XbM5w7f206xorBDJXfzOo5q83z6XjZ07SqC6qfhqCtC4tZBIbI"
+                  fill
                 />
               </div>
             </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { usePathname } from "next/navigation";
 
@@ -10,12 +11,12 @@ export default function DashboardSidebar({ onContactClick }: DashboardSidebarPro
   const pathname = usePathname();
 
   const menuItems = [
-    { name: "Overview", href: "/account/dashboard", icon: "dashboard" },
-    { name: "My Properties", href: "/account/my-properties", icon: "home_work" },
-    { name: "Add Property", href: "/account/add-property", icon: "add_circle" },
-    { name: "Messages", href: "/account/messages", icon: "chat" },
-    { name: "Profile", href: "/account/profile", icon: "person" },
+    { name: "Overview", href: "/account", icon: "dashboard" },
+    { name: "My Properties", href: "/account/management", icon: "home_work" },
+    { name: "Saved", href: "/account/saved", icon: "favorite" },
+    { name: "Inquiries", href: "/account/inquiries", icon: "chat" },
     { name: "Documents", href: "/account/vault", icon: "lock" },
+    { name: "Add Listing", href: "/account/add-listing", icon: "add_circle" },
   ];
 
   return (
@@ -51,8 +52,8 @@ export default function DashboardSidebar({ onContactClick }: DashboardSidebarPro
       <div className="bg-surface-container-high p-8 border border-outline-variant/10 rounded-sm">
         <h2 className="font-headline text-2xl mb-6">Your Curator</h2>
         <div className="flex items-center gap-6 mb-8">
-          <div className="w-16 h-16 bg-surface-container-highest overflow-hidden rounded-full border border-primary/20">
-            <img alt="Lead Curator" className="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxJNIMk-rrlMJQidp8f1Zehi2r03TcL6QczYBeDNh9w5iK_wzZsJtkF0ALM0kH4lpc8WzfFx1-qzQTcRba5xDPBUl31HIM5TIez5i536HVei9YmRzpczKRJxUZ9je13hh2t7DZRT9N7s4G-MGRiY8N8p7FLNn2a6N1f1ve_R0nz9VILGtDE9PyfgzaeYdHQB5AujDRnZxImzL4ANJ8FoFIGtYSIKmBgjjaOubqG7vlpd2WmO9nyy0_hoDDX76LUQ_9qfeBxzlikzc" />
+          <div className="w-16 h-16 bg-surface-container-highest overflow-hidden rounded-full border border-primary/20 relative">
+            <Image alt="Lead Curator" className="object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxJNIMk-rrlMJQidp8f1Zehi2r03TcL6QczYBeDNh9w5iK_wzZsJtkF0ALM0kH4lpc8WzfFx1-qzQTcRba5xDPBUl31HIM5TIez5i536HVei9YmRzpczKRJxUZ9je13hh2t7DZRT9N7s4G-MGRiY8N8p7FLNn2a6N1f1ve_R0nz9VILGtDE9PyfgzaeYdHQB5AujDRnZxImzL4ANJ8FoFIGtYSIKmBgjjaOubqG7vlpd2WmO9nyy0_hoDDX76LUQ_9qfeBxzlikzc" fill />
           </div>
           <div>
             <h4 className="font-bold font-headline">Divine Kariza</h4>

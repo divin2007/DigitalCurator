@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import Image from "next/image";
 import { properties } from "@/lib/mock-data";
 
 export default function ActiveInquiriesPage() {
@@ -31,9 +32,9 @@ export default function ActiveInquiriesPage() {
           {inquiries.map((inq, i) => (
             <div key={i} className={`flex items-center justify-between p-8 border ${inq.status === 'Action Required' ? 'bg-surface-container-low border-primary/20' : 'bg-surface-container-lowest border-outline-variant/20'} editorial-shadow group`}>
               <div className="flex items-center gap-8">
-                <div className={`w-24 h-24 overflow-hidden ${!inq.property && 'bg-primary/10 flex items-center justify-center'}`}>
+                <div className={`w-24 h-24 overflow-hidden relative ${!inq.property && 'bg-primary/10 flex items-center justify-center'}`}>
                   {inq.property ? (
-                    <img alt="Property" className="w-full h-full object-cover" src={inq.property.imageUrl} />
+                    <Image alt="Property" className="object-cover" src={inq.property.imageUrl} fill />
                   ) : (
                     <span className="material-symbols-outlined text-primary text-4xl">account_balance</span>
                   )}

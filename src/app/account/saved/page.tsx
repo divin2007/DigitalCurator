@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import Image from "next/image";
 import { properties } from "@/lib/mock-data";
 
 export default function SavedPropertiesPage() {
@@ -27,12 +28,13 @@ export default function SavedPropertiesPage() {
             <div key={property.id} className="bg-surface-container-low editorial-shadow transition-all group cursor-pointer border border-outline-variant/10">
               <Link href={`/properties/${property.id}`}>
                 <div className="relative aspect-[4/5] overflow-hidden bg-zinc-200">
-                  <img
+                  <Image
                     alt={property.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                     src={property.imageUrl}
+                    fill
                   />
-                  <span className="absolute top-4 right-4 rounded-full px-4 py-1.5 bg-primary-fixed text-on-primary-fixed-variant text-[0.6875rem] font-bold tracking-widest uppercase">
+                  <span className="absolute top-4 right-4 z-10 rounded-full px-4 py-1.5 bg-primary-fixed text-on-primary-fixed-variant text-[0.6875rem] font-bold tracking-widest uppercase">
                     {property.price}
                   </span>
                 </div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 
 export default function LoginPage() {
@@ -11,13 +12,24 @@ export default function LoginPage() {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate authentication
+    setIsLoading(true);
+    setMessage("");
+
+    // Simulate authentication delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
     console.log("Logging in with:", formData);
-    // Redirect to account dashboard
-    router.push("/account");
+    setIsLoading(false);
+    setMessage("Authentication successful. Redirecting...");
+
+    setTimeout(() => {
+      router.push("/account");
+    }, 1000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +55,11 @@ export default function LoginPage() {
               <h2 className="font-bold text-3xl text-neutral-800 tracking-tight">Welcome back</h2>
             </div>
             <form className="space-y-10" onSubmit={handleSubmit}>
+              {message && (
+                <div className={`p-4 text-sm font-body ${message.includes('successful') ? 'bg-primary/10 text-primary' : 'bg-error/10 text-error'} rounded-sm`}>
+                  {message}
+                </div>
+              )}
               {/* Email Field */}
               <div className="relative group">
                 <label className="font-label text-[0.75rem] text-neutral-400 mb-1 block" htmlFor="email">Email</label>
@@ -77,8 +94,8 @@ export default function LoginPage() {
                 </div>
               </div>
               <div className="pt-6 flex flex-col items-center gap-10">
-                <Button className="w-full" type="submit">
-                  LOGIN
+                <Button className="w-full" type="submit" disabled={isLoading}>
+                  {isLoading ? "AUTHENTICATING..." : "LOGIN"}
                 </Button>
                 <div className="flex items-center justify-center gap-1">
                   <span className="font-body text-[0.75rem] text-neutral-400">Don&apos;t have an account?</span>
@@ -90,10 +107,11 @@ export default function LoginPage() {
         </div>
         {/* Right Side: Visual Section */}
         <div className="hidden md:block absolute right-0 top-0 bottom-0 w-[55%] z-0">
-          <img
+          <Image
             alt="Luxury Architecture"
-            className="w-full h-full object-cover"
+            className="object-cover"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyxzMS8EL2O3pm5K0twimFVj4G77D-jwz6iUTsEs15_51lYNJbt0a0kiazkko2PBsskoULCHFsVnH61XBDbJijyvursMlUQ3TR_d2UisDE6PKiBr7gY77uNc611yLsjkrAZUyGA1_ABRJB7whQHPACDZqPaRG8XMC9Gg33XOo9JJhBSaZ3mjcl15Z9O9l_Lq2nz2LftNIyaERX1oKP3XV3RrFsx-HMJWEKYdWmSZ0XHarsk5yrqiKfGalgUBqgMXAamks_iGHXfC4"
+            fill
           />
           <div className="absolute inset-0 bg-black/10"></div>
         </div>

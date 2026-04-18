@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Button from "@/components/ui/Button";
@@ -7,12 +8,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function MyProperties() {
-  const properties = [
+  const [propertyList, setPropertyList] = useState([
     {
       id: "DC-8802",
       title: "Serenity Peak Estate",
       location: "Kigali, Rebero District",
-      status: "Verified Ownership",
+      status: "Active",
       price: "$3.2M",
       beds: 6,
       area: "6,200 sqft",
@@ -20,7 +21,22 @@ export default function MyProperties() {
       leads: "48",
       imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBazJI622wRiagsGt7w3oUBGO54vXJs2hicyBOrZtCjL9YbsagKm7SWwZpx9CDcLV10Vpz1pI1r4eRb2JX9fbosk9jGacWEMielPtRtz9SiwdTmqyThnYHlUne01sH-7sVbWXSVUtyv0pDFUp6kBAxmBMxmNFgEtpl_oFAzhj1C2oa5JcbwE_YrrY2jDYTGURg5PYjYZ_xXtgd-XE1oYs6g8YEeBNxw6n7lIfTZzu-Xcduoo7FttHU3RwQpHBDJln8DM7ISKHL2-CQ"
     }
-  ];
+  ]);
+  const [filter, setFilter] = useState("All");
+
+  const filteredProperties = propertyList.filter(p =>
+    filter === "All" || p.status === filter
+  );
+
+  const toggleStatus = (id: string) => {
+    setPropertyList(prev => prev.map(p => {
+      if (p.id === id) {
+        const nextStatus = p.status === "Active" ? "Pending" : p.status === "Pending" ? "Sold" : "Active";
+        return { ...p, status: nextStatus };
+      }
+      return p;
+    }));
+  };
 
   return (
     <>
@@ -72,14 +88,20 @@ export default function MyProperties() {
           <div className="flex items-center justify-between border-b border-outline-variant/30 pb-4">
             <h2 className="font-headline text-3xl">Active Listings</h2>
             <div className="flex gap-4">
-               <button className="text-xs font-bold uppercase tracking-widest border-b-2 border-primary pb-1 font-label">All</button>
-               <button className="text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors pb-1 font-label">Pending</button>
-               <button className="text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors pb-1 font-label">Sold</button>
+               {["All", "Pending", "Sold"].map((f) => (
+                 <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={`text-xs font-bold uppercase tracking-widest pb-1 font-label transition-all ${filter === f ? 'border-b-2 border-primary text-on-surface' : 'text-on-surface-variant hover:text-on-surface'}`}
+                >
+                  {f}
+                </button>
+               ))}
             </div>
           </div>
 
           <div className="space-y-6">
-            {properties.map((prop, i) => (
+            {filteredProperties.map((prop, i) => (
               <div key={i} className="group bg-surface-container-lowest overflow-hidden flex flex-col md:flex-row editorial-shadow transition-all hover:bg-surface-container-low cursor-pointer border border-outline-variant/10">
                 <div className="md:w-80 h-64 overflow-hidden relative">
                   <Image
@@ -92,7 +114,11 @@ export default function MyProperties() {
                 <div className="flex-1 p-8 flex flex-col md:flex-row justify-between md:items-center gap-8">
                   <div className="space-y-2">
                     <div className="flex items-center gap-3">
-                      <span className="bg-primary-fixed text-on-primary-fixed-variant px-3 py-0.5 rounded-full text-[0.6rem] font-bold tracking-widest uppercase font-label">Active</span>
+                      <span className={`px-3 py-0.5 rounded-full text-[0.6rem] font-bold tracking-widest uppercase font-label ${
+                        prop.status === "Active" ? "bg-primary-fixed text-on-primary-fixed-variant" :
+                        prop.status === "Pending" ? "bg-secondary-container text-on-secondary-container" :
+                        "bg-inverse-surface text-white"
+                      }`}>{prop.status}</span>
                       <span className="text-on-surface-variant text-xs font-body">ID: {prop.id}</span>
                     </div>
                     <h4 className="text-2xl font-headline font-semibold text-on-surface">{prop.title}</h4>
@@ -120,11 +146,19 @@ export default function MyProperties() {
                       <span className="material-symbols-outlined text-sm">open_in_new</span>
                     </Link>
                     <div className="flex gap-2">
-                       <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors border border-outline-variant/20" title="Edit Listing">
-                          <span className="material-symbols-outlined text-on-surface-variant text-lg">edit</span>
-                       </button>
-                       <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors border border-outline-variant/20" title="More Actions">
-                          <span className="material-symbols-outlined text-on-surface-variant text-lg">more_vert</span>
+                       <Link
+                        href={`/account/edit-property/${prop.id}`}
+                        className="p-2 rounded-full transition-colors border hover:bg-surface-container-high text-on-surface-variant border-outline-variant/20"
+                        title="Edit Listing"
+                      >
+                          <span className="material-symbols-outlined text-lg">edit</span>
+                       </Link>
+                       <button
+                        onClick={() => toggleStatus(prop.id)}
+                        className="p-2 hover:bg-surface-container-high rounded-full transition-colors border border-outline-variant/20"
+                        title="Change Status"
+                      >
+                          <span className="material-symbols-outlined text-on-surface-variant text-lg">sync</span>
                        </button>
                     </div>
                   </div>

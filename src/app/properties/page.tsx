@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { properties } from "@/lib/mock-data";
 import Link from "next/link";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 
 export default function Properties() {
@@ -62,12 +63,13 @@ export default function Properties() {
               >
                 <Link href={`/properties/${property.id}`}>
                   <div className={`relative ${isLarge ? "aspect-[16/9]" : "aspect-[4/5]"} mb-6 overflow-hidden bg-surface-container-low`}>
-                    <img
+                    <Image
                       alt={property.title}
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
                       src={property.imageUrl}
+                      fill
                     />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-10">
                       <div className="bg-white/90 backdrop-blur-sm text-on-surface px-8 py-3 font-bold tracking-widest text-[0.6875rem] uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                         View Estate Details
                       </div>

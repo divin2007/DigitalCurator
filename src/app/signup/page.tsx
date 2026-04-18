@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 
 export default function SignupPage() {
@@ -13,13 +14,24 @@ export default function SignupPage() {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate registration
+    setIsLoading(true);
+    setMessage("");
+
+    // Simulate registration delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
     console.log("Registering with:", formData);
-    // Redirect to account dashboard
-    router.push("/account");
+    setIsLoading(false);
+    setMessage("Account created successfully. Welcome to the elite.");
+
+    setTimeout(() => {
+      router.push("/account");
+    }, 1500);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +57,11 @@ export default function SignupPage() {
               <h2 className="font-bold text-3xl text-neutral-800 tracking-tight">Join the Elite</h2>
             </div>
             <form className="space-y-6" onSubmit={handleSubmit}>
+              {message && (
+                <div className={`p-4 text-sm font-body ${message.includes('successfully') ? 'bg-primary/10 text-primary' : 'bg-error/10 text-error'} rounded-sm`}>
+                  {message}
+                </div>
+              )}
               {/* Full Name Field */}
               <div className="relative group">
                 <label className="font-label text-[0.75rem] text-neutral-400 mb-1 block" htmlFor="name">Full Name</label>
@@ -104,8 +121,8 @@ export default function SignupPage() {
                 />
               </div>
               <div className="pt-4 flex flex-col items-center gap-8">
-                <Button className="w-full" type="submit">
-                  CREATE ACCOUNT
+                <Button className="w-full" type="submit" disabled={isLoading}>
+                  {isLoading ? "CREATING ACCOUNT..." : "CREATE ACCOUNT"}
                 </Button>
                 <div className="flex items-center justify-center gap-1">
                   <span className="font-body text-[0.75rem] text-neutral-400">Already have an account?</span>
@@ -117,10 +134,11 @@ export default function SignupPage() {
         </div>
         {/* Right Side: Visual Section */}
         <div className="hidden md:block absolute right-0 top-0 bottom-0 w-[55%] z-0">
-          <img
+          <Image
             alt="Luxury Architecture"
-            className="w-full h-full object-cover"
+            className="object-cover"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyxzMS8EL2O3pm5K0twimFVj4G77D-jwz6iUTsEs15_51lYNJbt0a0kiazkko2PBsskoULCHFsVnH61XBDbJijyvursMlUQ3TR_d2UisDE6PKiBr7gY77uNc611yLsjkrAZUyGA1_ABRJB7whQHPACDZqPaRG8XMC9Gg33XOo9JJhBSaZ3mjcl15Z9O9l_Lq2nz2LftNIyaERX1oKP3XV3RrFsx-HMJWEKYdWmSZ0XHarsk5yrqiKfGalgUBqgMXAamks_iGHXfC4"
+            fill
           />
           <div className="absolute inset-0 bg-black/10"></div>
         </div>

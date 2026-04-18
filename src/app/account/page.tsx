@@ -14,6 +14,20 @@ import SecuredAssets from "@/components/account/SecuredAssets";
 
 export default function Account() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+
+  const handleSendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSending(true);
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsSending(false);
+    setIsSent(true);
+    setTimeout(() => {
+      setIsSent(false);
+      setIsContactModalOpen(false);
+    }, 2000);
+  };
 
   return (
     <>
@@ -47,15 +61,27 @@ export default function Account() {
               <span className="material-symbols-outlined">close</span>
             </button>
             <h2 className="font-headline text-3xl mb-4">Direct Message</h2>
-            <p className="text-on-secondary-container mb-8 font-body">Send a secure inquiry to your dedicated curator.</p>
-            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setIsContactModalOpen(false); }}>
-              <textarea
-                className="w-full border-0 border-b border-outline-variant py-3 focus:ring-0 focus:border-primary font-body text-lg resize-none"
-                placeholder="How can Divine assist you today?"
-                rows={4}
-              ></textarea>
-              <Button type="submit" className="w-full text-white">Send Message</Button>
-            </form>
+            {isSent ? (
+              <div className="py-10 text-center space-y-4">
+                <span className="material-symbols-outlined text-5xl text-primary">verified</span>
+                <p className="text-on-surface font-headline italic">Message Sent</p>
+              </div>
+            ) : (
+              <>
+                <p className="text-on-secondary-container mb-8 font-body">Send a secure inquiry to your dedicated curator.</p>
+                <form className="space-y-6" onSubmit={handleSendMessage}>
+                  <textarea
+                    className="w-full border-0 border-b border-outline-variant py-3 focus:ring-0 focus:border-primary font-body text-lg resize-none"
+                    placeholder="How can Divine assist you today?"
+                    rows={4}
+                    required
+                  ></textarea>
+                  <Button type="submit" className="w-full text-white" disabled={isSending}>
+                    {isSending ? "SENDING..." : "Send Message"}
+                  </Button>
+                </form>
+              </>
+            )}
           </div>
         </div>
       )}
