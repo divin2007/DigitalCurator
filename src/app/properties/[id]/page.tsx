@@ -19,6 +19,7 @@ export default function PropertyDetail({ params: paramsPromise }: { params: Prom
   });
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showFloorplans, setShowFloorplans] = useState(false);
 
   if (!property) {
     notFound();
@@ -81,7 +82,7 @@ export default function PropertyDetail({ params: paramsPromise }: { params: Prom
               <p className="text-on-secondary-container text-sm leading-relaxed font-body">
                 Features a 180-degree panoramic view, a private terrace, and a spa-inspired bathroom finished with Rwandan volcanic stone and Italian marble.
               </p>
-              <button className="text-primary text-sm font-bold border-b border-primary/30 pb-1 hover:border-primary transition-all font-label uppercase" onClick={() => alert("Architectural floorplans are available for verified inquiries.")}>View Floorplans</button>
+              <button className="text-primary text-sm font-bold border-b border-primary/30 pb-1 hover:border-primary transition-all font-label uppercase" onClick={() => setShowFloorplans(true)}>View Floorplans</button>
             </div>
 
             <div className="flex items-center gap-6 p-6 bg-surface-container-low rounded-sm border border-outline-variant/30">
@@ -199,6 +200,36 @@ export default function PropertyDetail({ params: paramsPromise }: { params: Prom
           </aside>
         </section>
       </main>
+      {/* Floorplans Modal */}
+      {showFloorplans && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white max-w-4xl w-full p-12 relative editorial-shadow overflow-hidden">
+            <button
+              onClick={() => setShowFloorplans(false)}
+              className="absolute top-6 right-6 text-zinc-400 hover:text-black transition-colors"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+            <h2 className="font-headline text-3xl mb-4">Architectural Floorplans</h2>
+            <p className="text-on-secondary-container mb-8 font-body">Verification of status required for full detailed blueprints. Below is a simplified schematic.</p>
+            <div className="aspect-video bg-surface-container-low border border-outline-variant/20 rounded-sm relative flex items-center justify-center overflow-hidden">
+               <div className="absolute inset-0 opacity-10">
+                 <div className="grid grid-cols-12 h-full">
+                    {Array.from({ length: 12 }).map((_, i) => <div key={i} className="border-r border-outline" />)}
+                 </div>
+               </div>
+               <div className="relative z-10 text-center space-y-4">
+                 <span className="material-symbols-outlined text-primary text-6xl opacity-40">architecture</span>
+                 <p className="text-xs uppercase tracking-[0.4em] font-label font-bold text-on-surface-variant">Schematic Locked</p>
+               </div>
+            </div>
+            <div className="mt-8 flex justify-end">
+               <Button onClick={() => { setShowFloorplans(false); document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }); }}>Request Full Blueprints</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </>
   );

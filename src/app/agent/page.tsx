@@ -31,6 +31,24 @@ export default function AgentDashboard() {
     }));
   };
 
+  const [editProperty, setEditProperty] = useState<{
+    id: string;
+    title: string;
+    location: string;
+    status: string;
+    views: string;
+    leads: string;
+    value: string;
+    imageUrl: string;
+  } | null>(null);
+
+  const handleEditSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editProperty) return;
+    setPropertyList(prev => prev.map(p => p.id === editProperty.id ? editProperty : p));
+    setEditProperty(null);
+  };
+
   const inquiries = [
     { name: "Jean-Paul Karekezi", property: "The Obsidian Pavilion", action: "Inquired" },
     { name: "Elena Rossi", property: "Lake Kivu Suite", action: "Requested viewing" },
@@ -143,7 +161,7 @@ export default function AgentDashboard() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors" onClick={(e) => { e.stopPropagation(); alert("Edit interface would open here.") }}>
+                    <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors" onClick={(e) => { e.stopPropagation(); setEditProperty(item) }}>
                       <span className="material-symbols-outlined text-on-surface-variant">edit</span>
                     </button>
                     <button className="p-2 hover:bg-surface-container-high rounded-full transition-colors" onClick={(e) => { e.stopPropagation(); toggleStatus(item.id) }}>
@@ -239,6 +257,57 @@ export default function AgentDashboard() {
               </div>
             </form>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Edit Property Modal */}
+      {editProperty && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white max-w-2xl w-full p-12 relative editorial-shadow max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setEditProperty(null)}
+              className="absolute top-6 right-6 text-zinc-400 hover:text-black transition-colors"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+            <h2 className="font-headline text-3xl mb-8">Edit Portfolio Item</h2>
+            <form className="space-y-6" onSubmit={handleEditSave}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Property Title</label>
+                  <input
+                    value={editProperty.title}
+                    onChange={(e) => setEditProperty({...editProperty, title: e.target.value})}
+                    className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body"
+                    type="text"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Location</label>
+                  <input
+                    value={editProperty.location}
+                    onChange={(e) => setEditProperty({...editProperty, location: e.target.value})}
+                    className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Price / Value</label>
+                  <input
+                    value={editProperty.value}
+                    onChange={(e) => setEditProperty({...editProperty, value: e.target.value})}
+                    className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div className="pt-4">
+                <Button type="submit" className="w-full">Save Changes</Button>
+              </div>
+            </form>
           </div>
         </div>
       )}

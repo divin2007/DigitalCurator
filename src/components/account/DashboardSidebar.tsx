@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect } from "react";
 import Button from "@/components/ui/Button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface DashboardSidebarProps {
   onContactClick: () => void;
@@ -9,6 +10,7 @@ interface DashboardSidebarProps {
 
 export default function DashboardSidebar({ onContactClick }: DashboardSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const menuItems = [
     { name: "Overview", href: "/account", icon: "dashboard" },
@@ -17,7 +19,24 @@ export default function DashboardSidebar({ onContactClick }: DashboardSidebarPro
     { name: "Inquiries", href: "/account/inquiries", icon: "chat" },
     { name: "Documents", href: "/account/vault", icon: "lock" },
     { name: "Add Listing", href: "/account/add-listing", icon: "add_circle" },
+    { name: "Sign Out", href: "/", icon: "logout" },
   ];
+
+  const handleLogout = (e: React.MouseEvent, href: string, name: string) => {
+    if (name === "Sign Out") {
+      e.preventDefault();
+      // Redirecting home - cookie clearing is handled in useEffect to satisfy lint rules
+      router.push("/?logout=true");
+    }
+  };
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get("logout") === "true") {
+      document.cookie = "auth_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      router.replace("/");
+    }
+  }, [router]);
 
   return (
     <aside className="space-y-8">
@@ -29,6 +48,7 @@ export default function DashboardSidebar({ onContactClick }: DashboardSidebarPro
             <Link
               key={item.name}
               href={item.href}
+              onClick={(e) => handleLogout(e, item.href, item.name)}
               className={`flex items-center gap-4 px-4 py-3 transition-colors group rounded-sm ${
                 pathname === item.href ? "bg-white border-l-4 border-primary" : "hover:bg-white/50"
               }`}

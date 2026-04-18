@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { properties } from "@/lib/mock-data";
@@ -8,6 +9,17 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 
 export default function Properties() {
+  const [typeFilter, setTypeFilter] = useState<string>("All");
+  const [offerFilter, setOfferFilter] = useState<string>("All");
+
+  const filteredProperties = useMemo(() => {
+    return properties.filter(property => {
+      const matchesType = typeFilter === "All" || property.type.toLowerCase() === typeFilter.toLowerCase();
+      const matchesOffer = offerFilter === "All" || property.offer.toLowerCase() === offerFilter.toLowerCase();
+      return matchesType && matchesOffer;
+    });
+  }, [typeFilter, offerFilter]);
+
   return (
     <>
       <Navbar />
@@ -28,22 +40,35 @@ export default function Properties() {
               <div className="flex items-center gap-4">
                 <span className="text-[0.6875rem] uppercase tracking-widest text-on-surface-variant font-bold font-label">Type:</span>
                 <div className="flex gap-1.5">
-                  <button className="px-3 py-1 rounded-full border border-primary text-primary text-xs font-semibold transition-all">All</button>
-                  <button className="px-3 py-1 rounded-full border border-outline-variant text-xs font-semibold text-on-surface-variant hover:border-primary transition-all">House</button>
-                  <button className="px-3 py-1 rounded-full border border-outline-variant text-xs font-semibold text-on-surface-variant hover:border-primary transition-all">Land</button>
+                  {["All", "House", "Land"].map((t) => (
+                    <button
+                      key={t}
+                      onClick={() => setTypeFilter(t)}
+                      className={`px-3 py-1 rounded-full border text-xs font-semibold transition-all ${typeFilter === t ? 'border-primary text-primary' : 'border-outline-variant text-on-surface-variant hover:border-primary'}`}
+                    >
+                      {t}
+                    </button>
+                  ))}
                 </div>
               </div>
               {/* Status Filter */}
               <div className="flex items-center gap-4">
                 <span className="text-[0.6875rem] uppercase tracking-widest text-on-surface-variant font-bold font-label">Offer:</span>
                 <div className="flex gap-1.5">
-                  <button className="px-3 py-1 rounded-full border border-outline-variant text-xs font-semibold text-on-surface-variant hover:border-primary transition-all">Buy</button>
-                  <button className="px-3 py-1 rounded-full border border-outline-variant text-xs font-semibold text-on-surface-variant hover:border-primary transition-all">Rent</button>
+                  {["All", "Buy", "Rent"].map((o) => (
+                    <button
+                      key={o}
+                      onClick={() => setOfferFilter(o)}
+                      className={`px-3 py-1 rounded-full border text-xs font-semibold transition-all ${offerFilter === o ? 'border-primary text-primary' : 'border-outline-variant text-on-surface-variant hover:border-primary'}`}
+                    >
+                      {o}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-4 text-on-surface-variant text-xs uppercase tracking-widest font-label">
-              <span className="font-bold">{properties.length} results</span>
+              <span className="font-bold">{filteredProperties.length} results</span>
               <span className="h-4 w-[1px] bg-outline-variant"></span>
               <button className="flex items-center gap-2 hover:text-primary transition-colors font-bold">
                 <span className="material-symbols-outlined text-[18px]">tune</span> Filter
@@ -53,55 +78,67 @@ export default function Properties() {
         </section>
 
         {/* Bento Grid Gallery */}
-        <section className="grid grid-cols-1 md:grid-cols-12 gap-y-24 gap-x-12">
-          {properties.map((property, index) => {
-            const isLarge = index % 3 === 0;
-            return (
-              <div
-                key={property.id}
-                className={`${isLarge ? "md:col-span-8" : "md:col-span-4"} group cursor-pointer relative`}
-              >
-                <Link href={`/properties/${property.id}`}>
-                  <div className={`relative ${isLarge ? "aspect-[16/9]" : "aspect-[4/5]"} mb-6 overflow-hidden bg-surface-container-low`}>
-                    <Image
-                      alt={property.title}
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                      src={property.imageUrl}
-                      fill
-                    />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-10">
-                      <div className="bg-white/90 backdrop-blur-sm text-on-surface px-8 py-3 font-bold tracking-widest text-[0.6875rem] uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                        View Estate Details
+        {filteredProperties.length > 0 ? (
+          <section className="grid grid-cols-1 md:grid-cols-12 gap-y-24 gap-x-12">
+            {filteredProperties.map((property, index) => {
+              const isLarge = index % 3 === 0;
+              return (
+                <div
+                  key={property.id}
+                  className={`${isLarge ? "md:col-span-8" : "md:col-span-4"} group cursor-pointer relative`}
+                >
+                  <Link href={`/properties/${property.id}`}>
+                    <div className={`relative ${isLarge ? "aspect-[16/9]" : "aspect-[4/5]"} mb-6 overflow-hidden bg-surface-container-low`}>
+                      <Image
+                        alt={property.title}
+                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                        src={property.imageUrl}
+                        fill
+                      />
+                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-10">
+                        <div className="bg-white/90 backdrop-blur-sm text-on-surface px-8 py-3 font-bold tracking-widest text-[0.6875rem] uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                          View Estate Details
+                        </div>
                       </div>
-                    </div>
-                    <span className="absolute top-6 right-6 bg-primary-fixed text-on-primary-fixed-variant px-4 py-1.5 rounded-full text-[0.6875rem] font-bold tracking-widest uppercase">
-                      {property.price}
-                    </span>
-                  </div>
-                </Link>
-                <div className="flex justify-between items-end">
-                  <div>
-                    <p className="text-[0.6875rem] uppercase tracking-widest text-primary font-bold mb-2 font-label">{property.location}</p>
-                    <h3 className="text-3xl font-bold tracking-tight mb-4 font-headline">{property.title}</h3>
-                    <div className="flex gap-6 text-on-surface-variant text-sm font-light font-body">
-                      {property.beds && (
-                        <span className="flex items-center gap-2">
-                          <span className="material-symbols-outlined text-[18px]">bed</span> {property.beds} Bedrooms
-                        </span>
-                      )}
-                      <span className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[18px]">square_foot</span> {property.area}
+                      <span className="absolute top-6 right-6 bg-primary-fixed text-on-primary-fixed-variant px-4 py-1.5 rounded-full text-[0.6875rem] font-bold tracking-widest uppercase">
+                        {property.price}
                       </span>
                     </div>
-                  </div>
-                  <Link href={`/properties/${property.id}`} className="flex items-center gap-2 text-primary font-bold text-[0.6875rem] uppercase tracking-widest pb-1 border-b border-primary/20 hover:border-primary transition-all font-label">
-                    Explore <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                   </Link>
+                  <div className="flex justify-between items-end">
+                    <div>
+                      <p className="text-[0.6875rem] uppercase tracking-widest text-primary font-bold mb-2 font-label">{property.location}</p>
+                      <h3 className="text-3xl font-bold tracking-tight mb-4 font-headline">{property.title}</h3>
+                      <div className="flex gap-6 text-on-surface-variant text-sm font-light font-body">
+                        {property.beds && (
+                          <span className="flex items-center gap-2">
+                            <span className="material-symbols-outlined text-[18px]">bed</span> {property.beds} Bedrooms
+                          </span>
+                        )}
+                        <span className="flex items-center gap-2">
+                          <span className="material-symbols-outlined text-[18px]">square_foot</span> {property.area}
+                        </span>
+                      </div>
+                    </div>
+                    <Link href={`/properties/${property.id}`} className="flex items-center gap-2 text-primary font-bold text-[0.6875rem] uppercase tracking-widest pb-1 border-b border-primary/20 hover:border-primary transition-all font-label">
+                      Explore <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </section>
+              );
+            })}
+          </section>
+        ) : (
+          <div className="py-24 text-center">
+            <p className="text-on-secondary-container font-headline text-2xl italic">No properties match your current curation.</p>
+            <button
+              onClick={() => { setTypeFilter("All"); setOfferFilter("All"); }}
+              className="mt-8 text-primary font-bold label-sm uppercase tracking-widest border-b border-primary pb-1"
+            >
+              Reset Filters
+            </button>
+          </div>
+        )}
 
         {/* Specialized Search CTA */}
         <section className="mt-32 p-16 bg-inverse-surface text-on-tertiary flex flex-col md:flex-row items-center justify-between gap-12">

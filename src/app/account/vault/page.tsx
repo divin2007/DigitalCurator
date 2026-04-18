@@ -5,11 +5,39 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 
+import { useState } from "react";
+
 export default function DocumentVault() {
-  const documents = [
+  const [documents, setDocuments] = useState([
     { name: "Digital Property Deed - Serenity Peak", type: "PDF", date: "Sept 24, 2024", size: "2.4 MB" },
     { name: "Investment Loan Agreement #DC-8921", type: "PDF", date: "Oct 12, 2024", size: "1.8 MB" },
-  ];
+  ]);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+
+  const handleUpload = async () => {
+    setIsUploading(true);
+    setUploadProgress(0);
+
+    for (let i = 0; i <= 100; i += 10) {
+      setUploadProgress(i);
+      await new Promise(resolve => setTimeout(resolve, 200));
+    }
+
+    const newDoc = {
+      name: "New Document " + (documents.length + 1),
+      type: "PDF",
+      date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      size: "1.2 MB"
+    };
+
+    setDocuments([...documents, newDoc]);
+    setIsUploading(false);
+  };
+
+  const handleDownload = (name: string) => {
+    alert(`Initiating secure download for: ${name}`);
+  };
 
   return (
     <>
@@ -46,17 +74,34 @@ export default function DocumentVault() {
                 </div>
                 <div className="col-span-4 text-right font-label text-xs text-on-secondary-container flex items-center justify-end gap-4">
                   {doc.date}
-                  <button className="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">download</button>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleDownload(doc.name); }}
+                    className="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    download
+                  </button>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-16 flex justify-center">
-            <Button variant="outline" className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-sm">upload</span>
-              Upload New Document
-            </Button>
+          <div className="mt-16 flex flex-col items-center gap-6">
+            {isUploading ? (
+              <div className="w-full max-w-xs space-y-2">
+                <div className="flex justify-between text-xs font-label uppercase tracking-widest text-on-surface-variant">
+                   <span>Encrypting...</span>
+                   <span>{uploadProgress}%</span>
+                </div>
+                <div className="h-1 bg-surface-container-highest w-full overflow-hidden">
+                   <div className="h-full bg-primary transition-all duration-300" style={{ width: `${uploadProgress}%` }} />
+                </div>
+              </div>
+            ) : (
+              <Button variant="outline" className="flex items-center gap-2" onClick={handleUpload}>
+                <span className="material-symbols-outlined text-sm">upload</span>
+                Upload New Document
+              </Button>
+            )}
           </div>
         </div>
       </main>
