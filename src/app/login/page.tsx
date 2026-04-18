@@ -24,6 +24,10 @@ export default function LoginPage() {
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     console.log("Logging in with:", formData);
+
+    // Set mock session cookie for middleware
+    document.cookie = "auth_session=true; path=/";
+
     setIsLoading(false);
     setMessage("Authentication successful. Redirecting...");
 

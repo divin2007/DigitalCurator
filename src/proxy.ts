@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Paths that require authentication
@@ -15,9 +15,7 @@ export function middleware(request: NextRequest) {
     const isAuthenticated = request.cookies.has('auth_session');
 
     if (!isAuthenticated) {
-      // Allow access for the prototype if the user is just navigating,
-      // but in a real scenario we would redirect:
-      // return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(new URL('/login', request.url));
     }
   }
 
