@@ -29,9 +29,9 @@ export default function ActiveInquiriesPage() {
 
         <div className="space-y-6">
           {inquiries.map((inq, i) => (
-            <div key={i} className={`flex items-center justify-between p-8 border ${inq.status === 'Action Required' ? 'bg-inverse-surface text-inverse-on-surface border-transparent' : 'bg-surface-container-lowest border-outline-variant/20'} editorial-shadow group`}>
+            <div key={i} className={`flex items-center justify-between p-8 border ${inq.status === 'Action Required' ? 'bg-surface-container-low border-primary/20' : 'bg-surface-container-lowest border-outline-variant/20'} editorial-shadow group`}>
               <div className="flex items-center gap-8">
-                <div className={`w-24 h-24 overflow-hidden ${!inq.property && 'bg-primary/20 flex items-center justify-center'}`}>
+                <div className={`w-24 h-24 overflow-hidden ${!inq.property && 'bg-primary/10 flex items-center justify-center'}`}>
                   {inq.property ? (
                     <img alt="Property" className="w-full h-full object-cover" src={inq.property.imageUrl} />
                   ) : (
@@ -39,24 +39,24 @@ export default function ActiveInquiriesPage() {
                   )}
                 </div>
                 <div>
-                  <span className={`text-[0.6rem] uppercase tracking-widest font-bold ${inq.status === 'Action Required' ? 'text-primary-fixed-dim' : 'text-primary'}`}>
+                  <span className="text-[0.6rem] uppercase tracking-widest font-bold text-primary font-label">
                     {inq.type}
                   </span>
-                  <h4 className="font-bold text-2xl mt-1 font-headline">
+                  <h4 className="font-bold text-2xl mt-1 font-headline text-on-surface">
                     {inq.property ? inq.property.title : inq.title}
                   </h4>
-                  <p className={`text-sm mt-1 font-body ${inq.status === 'Action Required' ? 'text-zinc-400' : 'text-on-secondary-container'}`}>
+                  <p className="text-sm mt-1 font-body text-on-secondary-container">
                     {inq.property ? inq.property.location : `Ref: ${inq.ref}`} • Submitted {inq.date}
                   </p>
                 </div>
               </div>
               <div className="text-right">
                 <span className={`inline-block text-[0.75rem] font-bold px-4 py-1.5 uppercase tracking-widest mb-4 ${
-                  inq.status === 'Action Required' ? 'bg-white text-black' : 'bg-tertiary-container text-white'
+                  inq.status === 'Action Required' ? 'bg-primary text-white' : 'bg-tertiary-container text-white'
                 }`}>
                   {inq.status}
                 </span>
-                <p className="text-xs font-body opacity-60">
+                <p className="text-xs font-body text-on-secondary-container opacity-60">
                    {inq.status === 'Action Required' ? 'Requires your immediate attention' : 'Curator responding in ~24h'}
                 </p>
               </div>

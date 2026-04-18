@@ -54,7 +54,7 @@ export default function Account() {
                 placeholder="How can Divine assist you today?"
                 rows={4}
               ></textarea>
-              <Button type="submit" className="w-full">Send Message</Button>
+              <Button type="submit" className="w-full text-white">Send Message</Button>
             </form>
           </div>
         </div>

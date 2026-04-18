@@ -27,19 +27,19 @@ export default function ActiveInquiries() {
         </div>
 
         {/* Lending application card */}
-        <div className="flex items-center justify-between p-6 bg-inverse-surface text-inverse-on-surface group">
+        <div className="flex items-center justify-between p-6 bg-surface-container-low border border-primary/20 group">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 bg-primary/20 flex items-center justify-center">
+            <div className="w-20 h-20 bg-primary/10 flex items-center justify-center">
               <span className="material-symbols-outlined text-primary text-3xl">account_balance</span>
             </div>
             <div>
-              <span className="text-[0.6rem] uppercase tracking-widest text-primary-fixed-dim font-bold font-label">Lending Application</span>
-              <h4 className="font-bold text-xl mt-1 text-white font-headline">Residential Investment Loan</h4>
-              <p className="text-xs text-zinc-400 mt-1 font-body">Ref: #DC-8921 • Underwriter Review</p>
+              <span className="text-[0.6rem] uppercase tracking-widest text-primary font-bold font-label">Lending Application</span>
+              <h4 className="font-bold text-xl mt-1 text-on-surface font-headline">Residential Investment Loan</h4>
+              <p className="text-xs text-on-secondary-container mt-1 font-body">Ref: #DC-8921 • Underwriter Review</p>
             </div>
           </div>
           <div className="text-right">
-            <Button variant="outline" className="!border-white/20 hover:!bg-white hover:!text-black !text-[0.6875rem]">
+            <Button variant="outline" className="!border-primary/20 !text-[0.6875rem]">
               Action Required
             </Button>
           </div>
