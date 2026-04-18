@@ -17,10 +17,14 @@ export default function MyProperties() {
       area: "6,200 sqft",
       views: "12.4k",
       leads: "48",
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBazJI622wRiagsGt7w3oUBGO54vXJs2hicyBOrZtCjL9YbsagKm7SWwZpx9CDcLV10Vpz1pI1r4eRb2JX9fbosk9jGacWEMielPtRtz9SiwdTmqyThnYHlUne01sH-7sVbWXSVUtyv0pDFUp6kBAxmBMxmNFgEtpl_oFAzhj1C2oa5JcbwE_YrrY2jDYTGURg5PYjYZ_xXtgd-XE1oYs6g8YEeBNxw6n7lIfTZzu-Xcduoo7FttHU3RwQpHBDJln8DM7ISKHL2-CQ"
+      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBazJI622wRiagsGt7w3oUBGO54vXJs2hicyBOrZtCjL9YbsagKm7SWwZpx9CDcLV10Vpz1pI1r4eRb2JX9fbosk9jGacWEMielPtRtz9SiwdTmqyThnYHlUne01sH-7sVbWXSVUtyv0pDFUp6kBAxmBMxmNFgEtpl_oFAzhj1C2oa5JcbwE_YrrY2jDYTGURg5PYjYZ_xXtgd-XE1oYs6g8YEeBNxw6n7lIfTZzu-Xcduoo7FttHU3RwQpHBDJln8DM7ISKHL2-CQ",
+      description: "A prestigious hilltop estate offering panoramic views and world-class luxury."
     }
   ]);
   const [filter, setFilter] = useState("All");
+  const [editProperty, setEditProperty] = useState<typeof propertyList[0] | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   const filteredProperties = propertyList.filter(p =>
     filter === "All" || p.status === filter
@@ -142,13 +146,13 @@ export default function MyProperties() {
                     <span className="material-symbols-outlined text-sm">open_in_new</span>
                   </Link>
                   <div className="flex gap-2">
-                     <Link
-                      href={`/account/edit-property/${prop.id}`}
+                     <button
+                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); setEditProperty(prop); }}
                       className="p-2 rounded-full transition-colors border hover:bg-surface-container-high text-on-surface-variant border-outline-variant/20"
                       title="Edit Listing"
                     >
                         <span className="material-symbols-outlined text-lg">edit</span>
-                     </Link>
+                     </button>
                      <button
                       onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleStatus(prop.id); }}
                       className="p-2 hover:bg-surface-container-high rounded-full transition-colors border border-outline-variant/20"
@@ -163,6 +167,95 @@ export default function MyProperties() {
           ))}
         </div>
       </section>
+
+      {/* Edit Property Modal */}
+      {editProperty && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white max-w-2xl w-full p-12 relative editorial-shadow max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => { setEditProperty(null); setIsSaved(false); }}
+              className="absolute top-6 right-6 text-zinc-400 hover:text-black transition-colors"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+            <h2 className="font-headline text-3xl mb-8">Edit Listing</h2>
+
+            {isSaved ? (
+              <div className="py-20 text-center space-y-4">
+                <span className="material-symbols-outlined text-6xl text-primary">verified</span>
+                <h3 className="text-2xl font-headline">Listing Updated</h3>
+                <p className="text-on-secondary-container font-body">Your property details have been successfully refined.</p>
+              </div>
+            ) : (
+              <form className="space-y-6" onSubmit={async (e) => {
+                e.preventDefault();
+                setIsSaving(true);
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                setPropertyList(prev => prev.map(p => p.id === editProperty.id ? editProperty : p));
+                setIsSaving(false);
+                setIsSaved(true);
+                setTimeout(() => {
+                  setEditProperty(null);
+                  setIsSaved(false);
+                }, 2000);
+              }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-1">
+                    <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Property Title</label>
+                    <input
+                      value={editProperty.title}
+                      onChange={(e) => setEditProperty({...editProperty, title: e.target.value})}
+                      className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body text-on-surface"
+                      type="text"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Location</label>
+                    <input
+                      value={editProperty.location}
+                      onChange={(e) => setEditProperty({...editProperty, location: e.target.value})}
+                      className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body text-on-surface"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-1">
+                    <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Price / Value</label>
+                    <input
+                      value={editProperty.price}
+                      onChange={(e) => setEditProperty({...editProperty, price: e.target.value})}
+                      className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body text-on-surface"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[0.6875rem] uppercase tracking-widest text-secondary font-bold font-label">Description</label>
+                  <textarea
+                    value={editProperty.description || ""}
+                    onChange={(e) => setEditProperty({...editProperty, description: e.target.value})}
+                    className="w-full bg-transparent border-b border-outline-variant py-2 focus:border-primary outline-none font-body resize-none text-on-surface"
+                    rows={4}
+                    required
+                  ></textarea>
+                </div>
+                <div className="pt-4 flex gap-4">
+                  <Button type="submit" className="flex-1" disabled={isSaving}>
+                    {isSaving ? "SAVING..." : "SAVE CHANGES"}
+                  </Button>
+                  <Button variant="outline" className="flex-1" onClick={() => setEditProperty(null)}>
+                    CANCEL
+                  </Button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Curator Assistance CTA */}
       <section className="p-16 bg-surface-container-low border border-primary/20 rounded-sm flex flex-col md:flex-row items-center justify-between gap-12">
